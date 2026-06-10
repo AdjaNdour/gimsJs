@@ -3,34 +3,29 @@ import Service from "./service.js";
 class AuthService {
 
     connexion(email, password) {
-        
+       
         if (!email || !password) {
             alert("entrer les champs");
-            return;
+            return false;
         }
-
         let users = Service.get("users") || [];
-
         let user = users.find(c =>
             c.email.trim().toLowerCase() === email.toLowerCase() &&
             c.password.trim() === password
         );
-
         if (!user) {
             alert("Email ou mot de passe incorrect.");
-            return;
+            return false;
         }
 
         localStorage.setItem("user", JSON.stringify(user));
+        return true;
     }
 
     inscription(nom, email, password, passwordConf) {
 
         let users = Service.get("users") || [];
-        let existingUser = users.find(
-            user => user.email.trim().toLowerCase() === email.trim().toLowerCase()
-        );
-
+        let existingUser = users.find(user => user.email.trim().toLowerCase() === email.trim().toLowerCase());
         if (existingUser) {
             alert("Cet email est déjà utilisé.");
             return;
@@ -39,7 +34,6 @@ class AuthService {
             alert("les mot de pass ne correspondent pas.");
             return;
         }
-
         let newUser = {
             id: Date.now(),
             nom,
@@ -47,7 +41,6 @@ class AuthService {
             password,
             role: "client"
         };
-
         users.push(newUser);
         Service.save("users", users);
         console.log("ce que jai creer:", users);

@@ -1,5 +1,4 @@
 import AuthService from "./services/auth.services.js";
-import Service from "./services/service.js";
 
 const buttons = document.querySelectorAll("[data-page]");
 const btnConnexion = document.getElementById("btnConnexion");
@@ -26,53 +25,55 @@ sidebar.classList.remove("active");
 
 const authService = new AuthService();
 
-function remove(sidebar, pageHome, main) {
-    sidebar.classList.remove("active");
-    pageHome.classList.remove("active");
-    main.classList.remove("padd");
+function action(act) {
+    sidebar.classList[act]("active");
+    pageHome.classList[act]("active");
+    main.classList[act]("padd");
 }
-
-function add(sidebar, pageHome, main) {
-    sidebar.classList.add("active");
-    pageHome.classList.add("active");
-    main.classList.add("padd");
-}
-function inscriptionPage(login, sidebar, pageHome, main, inscription) {
+function inscriptionPage() {
     login.classList.remove("active");
     inscription.classList.add("active");
-    remove(sidebar, pageHome, main)
+    action("remove")
 }
-function showAcceuil(login, inscription, sidebar, pageHome, main) {
+function showAcceuil() {
     login.classList.remove("active");
     inscription.classList.remove("active");
-    add(sidebar, pageHome, main)
+    action("add")
 }
 
 btnConnexion.addEventListener("click", function (e) {
     e.preventDefault();
-    authService.connexion(inputEmail.value.trim(), inputPassword.value.trim(),);
-    showAcceuil(login, inscription, sidebar, pageHome, main);
+    let success = authService.connexion(inputEmail.value.trim(), inputPassword.value.trim(),);
+    if (success) {
+        showAcceuil();
+    }
 });
 
 lienIns.addEventListener("click", function (e) {
     e.preventDefault();
-    inscriptionPage(login, sidebar, pageHome, main, inscription);
+    inscriptionPage();
 });
 
 btnSinscrire.addEventListener("click", function (e) {
     e.preventDefault();
-    authService.inscription(inputNom.value.trim(), inputInsEmail.value.trim(), inputInsPassword.value.trim(), inputInsPasswordConf.value.trim());
-    inscription.classList.remove("active");
-    add(sidebar, pageHome, main)
+    let succes = authService.inscription(inputNom.value.trim(), inputInsEmail.value.trim(), inputInsPassword.value.trim(), inputInsPasswordConf.value.trim());
+    if (success) {
+        inscription.classList.remove("active");
+        action("add")
+    }
 });
 
 btnDeconnexion.addEventListener("click", function (e) {
     e.preventDefault();
     authService.deconnexion();
     login.classList.add("active");
-    remove(sidebar, pageHome, main)
+    action("remove");
     inputEmail.value = "";
     inputPassword.value = "";
+    inputNom.value = "";
+    inputInsEmail.value = "";
+    inputInsPassword.value = "";
+    inputInsPasswordConf.value = "";
 });
 
 buttons.forEach(btn => {
