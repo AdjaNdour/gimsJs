@@ -2,47 +2,8 @@ import Service from "./service.js";
 
 class AuthService {
 
-    showAcceuil(login, inscription, sidebar, pageHome, main) {
-        login.classList.remove("active");
-        inscription.classList.remove("active");
-        sidebar.classList.add("active");
-        pageHome.classList.add("active");
-        main.classList.add("padd");
-    }
-
-    showAcceuilAfterIns(inscription, sidebar, pageHome, main) {
-        inscription.classList.remove("active");
-        sidebar.classList.add("active");
-        pageHome.classList.add("active");
-        main.classList.add("padd");
-    }
-
-    showInscription(login, inscription, sidebar, pageHome, main) {
-        login.classList.remove("active");
-        inscription.classList.add("active");
-        sidebar.classList.remove("active");
-        pageHome.classList.remove("active");
-        main.classList.remove("padd");
-    }
-
-    connexionPage(login, sidebar, pageHome, main, inputEmail, inputPassword) {
-        login.classList.add("active");
-        sidebar.classList.remove("active");
-        pageHome.classList.remove("active");
-        main.classList.remove("padd");
-        inputEmail.value = "";
-        inputPassword.value = "";
-    }
-    inscriptionPage(login, sidebar, pageHome, main, inscription) {
-        login.classList.remove("active");
-        inscription.classList.add("active");
-        sidebar.classList.remove("active");
-        pageHome.classList.remove("active");
-        main.classList.remove("padd");
-    }
-
-    connexion(email, password, login, inscription, sidebar, pageHome, main) {
-
+    connexion(email, password) {
+        
         if (!email || !password) {
             alert("entrer les champs");
             return;
@@ -61,11 +22,10 @@ class AuthService {
         }
 
         localStorage.setItem("user", JSON.stringify(user));
-        this.showAcceuil(login, inscription, sidebar, pageHome, main);
     }
 
-    inscription(nom, email, password, passwordConf, login, sidebar, pageHome, main, inscription) {
-        
+    inscription(nom, email, password, passwordConf) {
+
         let users = Service.get("users") || [];
         let existingUser = users.find(
             user => user.email.trim().toLowerCase() === email.trim().toLowerCase()
@@ -92,12 +52,10 @@ class AuthService {
         Service.save("users", users);
         console.log("ce que jai creer:", users);
         localStorage.setItem("user", JSON.stringify(newUser));
-        this.showAcceuilAfterIns(inscription, sidebar, pageHome, main);
     }
 
-    deconnexion(login, sidebar, pageHome, main, inputEmail, inputPassword) {
+    deconnexion() {
         localStorage.removeItem("user");
-        this.connexionPage(login, sidebar, pageHome, main, inputEmail, inputPassword);
     }
 }
 
