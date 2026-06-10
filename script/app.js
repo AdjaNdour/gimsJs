@@ -18,6 +18,7 @@ let inputNom = document.getElementById("nom");
 let inputPassword = document.getElementById("password");
 let inputEmail = document.getElementById("email");
 let inputInsPassword = document.getElementById("passwordIns");
+let inputInsPasswordConf = document.getElementById("passwordInsConf");
 let inputInsEmail = document.getElementById("emailIns");
 
 let main = document.querySelector("main");
@@ -47,6 +48,7 @@ btnSinscrire.addEventListener("click", function (e) {
         inputNom.value.trim(),
         inputInsEmail.value.trim(),
         inputInsPassword.value.trim(),
+        inputInsPasswordConf.value.trim(),
         login,
         sidebar,
         pageHome,
@@ -57,8 +59,7 @@ btnSinscrire.addEventListener("click", function (e) {
 
 lienIns.addEventListener("click", function (e) {
     e.preventDefault();
-
-    authService.inscriptionPage( login, sidebar, pageHome, main, inscription );
+    authService.inscriptionPage(login, sidebar, pageHome, main, inscription);
 });
 
 btnDeconnexion.addEventListener("click", function (e) {

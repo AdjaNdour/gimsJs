@@ -33,7 +33,7 @@ class AuthService {
         inputEmail.value = "";
         inputPassword.value = "";
     }
-    inscriptionPage( login, sidebar, pageHome, main, inscription){
+    inscriptionPage(login, sidebar, pageHome, main, inscription) {
         login.classList.remove("active");
         inscription.classList.add("active");
         sidebar.classList.remove("active");
@@ -64,14 +64,8 @@ class AuthService {
         this.showAcceuil(login, inscription, sidebar, pageHome, main);
     }
 
-    inscription(nom, email, password, login, sidebar, pageHome, main, inscription) {
-
-        login.classList.remove("active");
-        inscription.classList.add("active");
-        sidebar.classList.remove("active");
-        pageHome.classList.remove("active");
-        main.classList.remove("padd");
-
+    inscription(nom, email, password, passwordConf, login, sidebar, pageHome, main, inscription) {
+        
         let users = Service.get("users") || [];
         let existingUser = users.find(
             user => user.email.trim().toLowerCase() === email.trim().toLowerCase()
@@ -79,6 +73,10 @@ class AuthService {
 
         if (existingUser) {
             alert("Cet email est déjà utilisé.");
+            return;
+        }
+        if (password !== passwordConf) {
+            alert("les mot de pass ne correspondent pas.");
             return;
         }
 
