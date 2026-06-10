@@ -1,4 +1,4 @@
-const inscriptionSection = document.getElementById("login");
+const inscriptionSection = document.getElementById("inscription");
 
 inscriptionSection.classList.add("active");
 
@@ -42,6 +42,15 @@ inscriptionSection.innerHTML = `
                     <div class="input-box">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" id="passwordIns" placeholder="veuillez entrer votre mot de passe">
+                    </div>
+                </div>
+            
+                <div class="input-group">
+                    <label>Mot de passe</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="passwordInsConf" placeholder="veuillez entrer votre mot de passe">
                     </div>
                 </div>
 

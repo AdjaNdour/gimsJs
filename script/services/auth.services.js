@@ -28,11 +28,11 @@ class AuthService {
         let existingUser = users.find(user => user.email.trim().toLowerCase() === email.trim().toLowerCase());
         if (existingUser) {
             alert("Cet email est déjà utilisé.");
-            return;
+            return false;
         }
         if (password !== passwordConf) {
             alert("les mot de pass ne correspondent pas.");
-            return;
+            return false;
         }
         let newUser = {
             id: Date.now(),
@@ -45,6 +45,7 @@ class AuthService {
         Service.save("users", users);
         console.log("ce que jai creer:", users);
         localStorage.setItem("user", JSON.stringify(newUser));
+        return true;
     }
 
     deconnexion() {

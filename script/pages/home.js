@@ -1,4 +1,4 @@
-const homeSection = document.getElementById("section");
+const homeSection = document.getElementById("home");
 
 homeSection.classList.add("active");
 

@@ -1,4 +1,7 @@
 import AuthService from "./services/auth.services.js";
+import "./pages/login.js";
+import "./pages/inscription.js";
+import "./pages/home.js";
 
 const buttons = document.querySelectorAll("[data-page]");
 const btnConnexion = document.getElementById("btnConnexion");
@@ -56,7 +59,7 @@ lienIns.addEventListener("click", function (e) {
 
 btnSinscrire.addEventListener("click", function (e) {
     e.preventDefault();
-    let succes = authService.inscription(inputNom.value.trim(), inputInsEmail.value.trim(), inputInsPassword.value.trim(), inputInsPasswordConf.value.trim());
+    let success = authService.inscription(inputNom.value.trim(), inputInsEmail.value.trim(), inputInsPassword.value.trim(), inputInsPasswordConf.value.trim());
     if (success) {
         inscription.classList.remove("active");
         action("add")
