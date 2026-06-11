@@ -1,7 +1,14 @@
 import AuthService from "./services/auth.services.js";
+
 import "./pages/login.js";
 import "./pages/inscription.js";
 import "./pages/home.js";
+import "./pages/detailsSalle.js";
+import "./pages/subscription.js";
+import "./pages/EmploieDuTemps.js";
+import "./pages/profil.js";
+import "./pages/nav.js";
+
 
 const buttons = document.querySelectorAll("[data-page]");
 const btnConnexion = document.getElementById("btnConnexion");
@@ -33,22 +40,28 @@ function action(act) {
     pageHome.classList[act]("active");
     main.classList[act]("padd");
 }
+
 function inscriptionPage() {
     login.classList.remove("active");
     inscription.classList.add("active");
     action("remove")
 }
+
 function showAcceuil() {
     login.classList.remove("active");
     inscription.classList.remove("active");
     action("add")
 }
 
-btnConnexion.addEventListener("click", function (e) {
+btnConnexion.addEventListener("click", async function (e) {
     e.preventDefault();
-    let success = authService.connexion(inputEmail.value.trim(), inputPassword.value.trim(),);
-    if (success) {
+    let user = await authService.connexion(
+        inputEmail.value.trim(),
+        inputPassword.value.trim()
+    );
+    if (user) {
         showAcceuil();
+        console.log(user);
     }
 });
 
@@ -57,18 +70,22 @@ lienIns.addEventListener("click", function (e) {
     inscriptionPage();
 });
 
-btnSinscrire.addEventListener("click", function (e) {
+btnSinscrire.addEventListener("click", async function (e) {
     e.preventDefault();
-    let success = authService.inscription(inputNom.value.trim(), inputInsEmail.value.trim(), inputInsPassword.value.trim(), inputInsPasswordConf.value.trim());
-    if (success) {
-        inscription.classList.remove("active");
-        action("add")
+    let user = await authService.inscription(
+        inputNom.value.trim(),
+        inputInsEmail.value.trim(),
+        inputInsPassword.value.trim(),
+        inputInsPasswordConf.value.trim()
+    );
+    if (user) {
+        showAcceuil();
     }
 });
 
-btnDeconnexion.addEventListener("click", function (e) {
+btnDeconnexion.addEventListener("click", async function (e) {
     e.preventDefault();
-    authService.deconnexion();
+    await authService.deconnexion();
     login.classList.add("active");
     action("remove");
     inputEmail.value = "";
