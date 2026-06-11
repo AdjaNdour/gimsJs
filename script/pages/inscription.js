@@ -19,6 +19,15 @@ inscriptionSection.innerHTML = `
             <form id="inscriptionForm">
 
                 <div class="input-group">
+                    <label>url Photo</label>
+
+                    <div class="input-box">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="photo" placeholder="url photo">
+                    </div>
+                </div>
+
+                  <div class="input-group">
                     <label>Nom</label>
 
                     <div class="input-box">

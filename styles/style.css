@@ -19,13 +19,16 @@
 
 .mt-30 {
     margin-top: 30px;
-}
+}margin-left
 
 body {
     display: flex;
     background: var(--background-color);
     height: 100vh;
+    overflow: hidden;
 }
+
+
 
 .login-page {
     display: flex;
@@ -152,10 +155,14 @@ label {
     justify-content: space-between;
     width: 280px;
     min-height: 100vh;
-    background: var(--secondary-color);
     color: white;
     padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: var(--secondary-color);
 }
+
 
 .sidebar h2 {
     display: flex;
@@ -209,6 +216,11 @@ p {
 main {
     flex: 1;
     padding: none;
+    height: 100vh;
+    overflow-y: auto;
+}
+.margin{
+    margin-left: 280px;
 }
 
 .padd {
@@ -217,6 +229,7 @@ main {
 
 .page {
     display: none;
+    min-height: 100vh;
 }
 
 .page.active {
@@ -495,6 +508,7 @@ td {
     font-size: 12px;
     margin: 4px;
 }
+
 .avatar {
     width: 50px;
     height: 50px;

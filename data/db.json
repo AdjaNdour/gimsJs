@@ -1,64 +1,89 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "photo": "https://i.pinimg.com/webp/1200x/ec/d1/63/ecd1630762437b7761c95ff6ab3c220d.webp",
-      "nom": "Coura",
-      "email": "kiki@gmail.com",
-      "password": "kiki",
-      "role": "client"
-    },
-    {
-      "id": "2",
-      "photo": "https://i.pinimg.com/webp/1200x/ec/d1/63/ecd1630762437b7761c95ff6ab3c220d.webp",
-      "nom": "Coura",
-      "email": "kikiCoach@gmail.com",
-      "password": "kiki",
-      "role": "coach",
-      "specialite": "Musculation"
-    },
-    {
-      "nom": "youssou",
-      "email": "youssou@gmail.com",
-      "password": "youssou",
-      "role": "client",
-      "id": "yGeb-u_8dFg"
-    }
-  ],
-  "salles": [
-    {
-      "id": "1",
-      "nom": "Zenith Wellness",
-      "adresse": "Dakar",
-      "prix": 10000,
-      "description": "Salle moderne",
-      "equipements": [
-        "Tapis",
-        "Vélos",
-        "Haltères"
-      ],
-      "images": []
-    }
-  ],
-  "abonnements": [
-    {
-      "id": "1",
-      "clientId": 1,
-      "salleId": 1,
-      "dateDebut": "2026-06-01",
-      "dateFin": "2026-07-01",
-      "montant": 10000,
-      "statut": "actif"
-    }
-  ],
-  "emploisDuTemps": [
-    {
-      "id": "1",
-      "clientId": 1,
-      "jour": "Lundi",
-      "heure": "18:00",
-      "activite": "Cardio"
-    }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+    "users": [
+        {
+            "id": "1",
+            "photo": "https://i.pinimg.com/webp/1200x/ec/d1/63/ecd1630762437b7761c95ff6ab3c220d.webp",
+            "nom": "Coura",
+            "email": "kiki@gmail.com",
+            "password": "kiki",
+            "role": "client"
+        },
+        {
+            "id": "yGeb-u_8dFg",
+            "photo": "https://i.pinimg.com/webp/1200x/ec/d1/63/ecd1630762437b7761c95ff6ab3c220d.webp",
+            "nom": "youssou",
+            "email": "youssou@gmail.com",
+            "password": "youssou",
+            "role": "client"
+        },
+        {
+            "id": "QPb7Rv6Pthw",
+            "photo": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+            "nom": "mama",
+            "email": "mama@gmail.com",
+            "password": "mama",
+            "role": "client"
+        }
+    ],
+    "salles": [
+        {
+            "id": "1",
+            "nom": "Zenith Wellness",
+            "adresse": "Dakar",
+            "prix": 10000,
+            "description": "Découvrez kay trun, une salle de sport moderne de 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
+            "equipements": [
+                "Tapis",
+                "Vélos",
+                "Haltères"
+            ],
+            "images": [
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg"
+            ],
+            "photoPrincipal": "https://i.pinimg.com/1200x/40/e6/c5/40e6c5f5681473f4914d7a5b98245cdd.jpg"
+        },
+                {
+            "id": "1",
+            "nom": "Zenith Wellness",
+            "adresse": "Dakar",
+            "prix": 10000,
+            "description": "Découvrez kay trun, une salle de sport moderne de 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
+            "equipements": [
+                "Tapis",
+                "Vélos",
+                "Haltères"
+            ],
+            "images": [
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+                "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg"
+            ],
+            "photoPrincipal": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg"
+        }
+    ],
+    "abonnements": [
+        {
+            "id": "1",
+            "clientId": 1,
+            "salleId": 1,
+            "dateDebut": "2026-06-01",
+            "dateFin": "2026-07-01",
+            "montant": 10000,
+            "statut": "actif"
+        }
+    ],
+    "emploisDuTemps": [
+        {
+            "id": "1",
+            "clientId": 1,
+            "jour": "Lundi",
+            "heure": "18:00",
+            "activite": "Cardio"
+        }
+    ],
+    "$schema": "./node_modules/json-server/schema.json"
 }

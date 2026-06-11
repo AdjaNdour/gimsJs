@@ -7,6 +7,21 @@ class Service {
         return await res.json();
     }
 
+    static async getAll(endpoint) {
+        try {
+            const res = await fetch(`${API_URL}/${endpoint}`);
+
+            if (!res.ok) {
+                throw new Error(`Erreur HTTP: ${res.status}`);
+            }
+
+            return await res.json();
+        } catch (error) {
+            console.error("Erreur API:", error);
+            return null;
+        }
+    }
+
     static async add(endpoint, data) {
         const res = await fetch(`${API_URL}/${endpoint}`, {
             method: "POST",

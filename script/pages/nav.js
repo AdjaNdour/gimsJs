@@ -1,18 +1,20 @@
 import AuthService from "../services/auth.services.js";
 
 const navSection = document.querySelector(".sidebar");
-const userConnect = AuthService.getUserConnect();
+
+// const userConnect = AuthService.getUserConnect();
+//    <div class="userConnect">
+//                 <img class="avatar" style="background-size: cover" src="${userConnect.photo}"></img>
+//                 <div>
+//                     <h3 id="userName">${userConnect.nom}</h3>
+//                     <p id="userEmail">${userConnect.email}</p>
+//                 </div>
+//             </div>
 
 navSection.innerHTML = `
         <div>
             <h2>Gim's Finder</h2>
-            <div class="userConnect">
-                <img class="avatar"></img>
-                <div>
-                    <h3 id="userName">${userConnect.nom}</h3>
-                    <p id="userEmail">${userConnect.email}</p>
-                </div>
-            </div>
+         
             <nav>
                 <button data-page="home" class="active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -24,7 +26,7 @@ navSection.innerHTML = `
                     Explorer
                 </button>
 
-                <button data-page="schedule" class="">
+                <button data-page="emploieDuTemps" class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none" />
                         <path fill="#ff6b21" fill-rule="evenodd"
@@ -33,7 +35,7 @@ navSection.innerHTML = `
                     temps
                 </button>
 
-                <button data-page="clients" class="">
+                <button data-page="mesClients" class="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none" />
                         <g class="users-outline">

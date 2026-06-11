@@ -23,6 +23,7 @@ const pageHome = document.querySelector("#home");
 const login = document.getElementById("login");
 const inscription = document.getElementById("inscription");
 
+let inputPhoto = document.getElementById("photo");
 let inputNom = document.getElementById("nom");
 let inputPassword = document.getElementById("password");
 let inputEmail = document.getElementById("email");
@@ -32,6 +33,7 @@ let inputInsEmail = document.getElementById("emailIns");
 let main = document.querySelector("main");
 
 sidebar.classList.remove("active");
+main.classList.remove("margin");
 
 const authService = new AuthService();
 
@@ -50,18 +52,19 @@ function inscriptionPage() {
 function showAcceuil() {
     login.classList.remove("active");
     inscription.classList.remove("active");
+    main.classList.add("margin");
     action("add")
 }
 
 btnConnexion.addEventListener("click", async function (e) {
     e.preventDefault();
-    let user = await authService.connexion(
+    let userConnect = await authService.connexion(
         inputEmail.value.trim(),
         inputPassword.value.trim()
     );
-    if (user) {
+    if (userConnect) {
         showAcceuil();
-        console.log(user);
+        console.table(userConnect);
     }
 });
 
@@ -74,6 +77,7 @@ btnSinscrire.addEventListener("click", async function (e) {
     e.preventDefault();
     let user = await authService.inscription(
         inputNom.value.trim(),
+        inputPhoto.value.trim(),
         inputInsEmail.value.trim(),
         inputInsPassword.value.trim(),
         inputInsPasswordConf.value.trim()
@@ -87,6 +91,7 @@ btnDeconnexion.addEventListener("click", async function (e) {
     e.preventDefault();
     await authService.deconnexion();
     login.classList.add("active");
+    main.classList.remove("margin");
     action("remove");
     inputEmail.value = "";
     inputPassword.value = "";
@@ -94,6 +99,7 @@ btnDeconnexion.addEventListener("click", async function (e) {
     inputInsEmail.value = "";
     inputInsPassword.value = "";
     inputInsPasswordConf.value = "";
+    inputPhoto.value = "";
 });
 
 buttons.forEach(btn => {
@@ -101,11 +107,18 @@ buttons.forEach(btn => {
         pages.forEach(page => {
             page.classList.remove("active");
         });
+        sidebar.classList.add("active");
 
         document
             .getElementById(btn.dataset.page)
             .classList.add("active");
-        sidebar.classList.add("active");
     });
 });
 
+function connectionPage() {
+    login.classList.add("active");
+    inscription.classList.remove("active");
+    pageHome.classList.remove("active")
+}
+
+showconnectionPageConn();

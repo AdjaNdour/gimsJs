@@ -1,7 +1,8 @@
 
 const loginSection = document.getElementById("login");
 
-loginSection.innerHTML = `
+loginSection.innerHTML = ` <section id="login" class="page active"> 
+
 <div class="login-page">
 
     <div class="brand">
