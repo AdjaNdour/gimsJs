@@ -1,8 +1,9 @@
 import { navigate } from '../router.js';
 import AuthService from "../services/auth.services.js";
+
 const authService = new AuthService();
 
-const Inscription = () => `  <section id="inscription" class="page "> 
+const Inscription = () => `  <section id="inscription" class="page active"> 
 
             <div class="inscription-page">
 
@@ -73,11 +74,11 @@ const Inscription = () => `  <section id="inscription" class="page ">
         </section>
 `;
 
-Inscription.afterRender = () => {
-    console.log("afterRender exécuté");
 
+Inscription.afterRender = () => {
+    console.log("INSCRIPTION AFTER RENDER OK");
     const btnSinscrire = document.getElementById('btnInscription');
-    
+
     let inputPhoto = document.getElementById("photo");
     let inputNom = document.getElementById("nom");
     let inputInsPassword = document.getElementById("passwordIns");
@@ -94,10 +95,8 @@ Inscription.afterRender = () => {
             inputInsPasswordConf.value.trim()
         );
         if (user) {
-            console.log("inscrition");
             navigate('/home');
         }
     });
 };
-
 export default Inscription;

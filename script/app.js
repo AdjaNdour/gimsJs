@@ -1,12 +1,14 @@
-import Nav from "./pages/nav.js";
 import { initRouter } from './router.js';
+import Nav from "./pages/nav.js";
 
-let sidebar = document.querySelector(".sidebar");
+document.addEventListener("DOMContentLoaded", () => {
 
-sidebar.innerHTML = Nav();
+    const sidebar = document.querySelector(".sidebar");
 
-if (Nav.afterRender) {
-    Nav.afterRender();
-}
+    if (sidebar) {
+        sidebar.innerHTML = Nav();
+        Nav.afterRender?.();
+    }
 
-initRouter();
+    initRouter();
+});

@@ -19,16 +19,14 @@
 
 .mt-30 {
     margin-top: 30px;
-}margin-left
+}
 
-body {
+margin-left body {
     display: flex;
     background: var(--background-color);
     height: 100vh;
     overflow: hidden;
 }
-
-
 
 .login-page {
     display: flex;
@@ -44,19 +42,6 @@ body {
 }
 
 .inscription-page {
-    display: flex;
-    justify-content: space-around;
-    overflow: hidden;
-    background-color: rgba(3, 8, 25, 0.75);
-    background-image: url("https://i.pinimg.com/1200x/6d/55/ad/6d55adf400d03279a98365fb424456a9.jpg");
-    background-blend-mode: multiply;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 100vh;
-}
-
-.intro-page {
     display: flex;
     justify-content: space-around;
     overflow: hidden;
@@ -89,6 +74,10 @@ body {
     flex-direction: column;
     gap: 25px;
     justify-content: center;
+}
+.brand{
+    color: var(--white-color);
+    font-size: 18px;
 }
 
 #inscriptionForm button {
@@ -232,7 +221,8 @@ main {
     height: 100vh;
     overflow-y: auto;
 }
-.margin{
+
+.margin {
     margin-left: 280px;
 }
 

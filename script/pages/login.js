@@ -37,7 +37,7 @@ const Login = () => ` <section id="login" class="page active">
             </div>
 
             <div id="lienIns" class="forgot">
-                s'inscrire
+                s'inscrire ?
             </div>
 
             <button type="submit" id="btnConnexion">connexion</button>
@@ -68,7 +68,6 @@ Login.afterRender = () => {
             console.log("connexion reussi !!!");
             navigate('/home');
         }
-
     });
     lienIns?.addEventListener('click', () => {
         navigate('/inscription');
