@@ -6,7 +6,7 @@ const Profile = () => {
     const user = AuthService.getUserConnect();
 
     return `
-    <section id="profile" class="page active padd">
+    <section id="profile" class="page profile-margin profile-padd">
 
         <div class="profile-container">
 

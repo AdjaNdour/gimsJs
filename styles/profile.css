@@ -1,5 +1,13 @@
+.profile-margin {
+    margin-left: 280px; 
+}
+
+.profile-padd {
+    padding: 20px;
+}
+
 .profile-container {
-    max-width: 900px;
+    max-width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
