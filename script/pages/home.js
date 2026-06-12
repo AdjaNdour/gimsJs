@@ -26,7 +26,7 @@ const Home = async () => {
     `).join("");
 
     return `
-        <section id="home" class="page active">
+        <section id="home" class="page active margin padd">
 
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
