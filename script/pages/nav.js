@@ -1,19 +1,18 @@
+import { navigate } from '../router.js';
 import AuthService from "../services/auth.services.js";
-
-const navSection = document.querySelector(".sidebar");
-
+const authService = new AuthService();
 // const userConnect = AuthService.getUserConnect();
-//    <div class="userConnect">
-//                 <img class="avatar" style="background-size: cover" src="${userConnect.photo}"></img>
-//                 <div>
-//                     <h3 id="userName">${userConnect.nom}</h3>
-//                     <p id="userEmail">${userConnect.email}</p>
-//                 </div>
-//             </div>
 
-navSection.innerHTML = `
+const Nav = () => ` 
         <div>
             <h2>Gim's Finder</h2>
+            <div class="userConnect">
+                <img class="avatar" style="background-size: cover" src=""></img>
+                <div>
+                    <h3 id="userName">kiki</h3>
+                    <p id="userEmail">kiki@gmail.xcom</p>
+                </div>
+            </div> 
          
             <nav>
                 <button data-page="home" class="active">
@@ -65,4 +64,43 @@ navSection.innerHTML = `
         </div>
 
         <button class="logout jcc" id="btnDeconnexion">Déconnexion</button>
-`
+`;
+
+Nav.afterRender = () => {
+    const btnDeconnexion = document.getElementById("btnDeconnexion");
+    let inputPhoto = document.getElementById("photo");
+    let inputNom = document.getElementById("nom");
+    let inputPassword = document.getElementById("password");
+    let inputEmail = document.getElementById("email");
+    let inputInsPassword = document.getElementById("passwordIns");
+    let inputInsPasswordConf = document.getElementById("passwordInsConf");
+    let inputInsEmail = document.getElementById("emailIns");
+
+    btnDeconnexion.addEventListener("click", async function (e) {
+        e.preventDefault();
+        await authService.deconnexion();
+        [
+            inputEmail,
+            inputPassword,
+            inputNom,
+            inputInsEmail,
+            inputInsPassword,
+            inputInsPasswordConf,
+            inputPhoto
+        ].forEach(input => {
+            if (input) input.value = "";
+        });
+        navigate("/connexion");
+
+    });
+
+    document.querySelectorAll("[data-page]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            navigate("/" + btn.dataset.page);
+        });
+    });
+
+};
+
+
+export default Nav;

@@ -1,7 +1,9 @@
 
-const loginSection = document.getElementById("login");
+import { navigate } from '../router.js';
+import AuthService from "../services/auth.services.js";
+const authService = new AuthService();
 
-loginSection.innerHTML = ` <section id="login" class="page active"> 
+const Login = () => ` <section id="login" class="page active"> 
 
 <div class="login-page">
 
@@ -46,3 +48,34 @@ loginSection.innerHTML = ` <section id="login" class="page active">
 
 </div>
 `;
+
+Login.afterRender = () => {
+    console.log("afterRender exécuté log");
+    const btnConnexion = document.getElementById('btnConnexion');
+    const lienIns = document.getElementById('lienIns');
+
+    let inputEmail = document.getElementById("email");
+    let inputPassword = document.getElementById("password");
+
+    btnConnexion?.addEventListener("click", async function (e) {
+        e.preventDefault();
+        let userConnect = await authService.connexion(
+            inputEmail.value.trim(),
+            inputPassword.value.trim()
+        );
+        if (userConnect) {
+            console.table(userConnect);
+            console.log("connexion");
+            navigate('/home');
+        }
+
+    });
+
+
+    lienIns?.addEventListener('click', () => {
+        navigate('/inscription');
+    });
+};
+
+
+export default Login;

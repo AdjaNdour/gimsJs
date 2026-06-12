@@ -56,6 +56,19 @@ body {
     height: 100vh;
 }
 
+.intro-page {
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    background-color: rgba(3, 8, 25, 0.75);
+    background-image: url("https://i.pinimg.com/1200x/6d/55/ad/6d55adf400d03279a98365fb424456a9.jpg");
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+}
+
 .login-card {
     display: flex;
     flex-direction: column;
