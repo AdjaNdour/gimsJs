@@ -75,7 +75,9 @@ const Inscription = () => `  <section id="inscription" class="page ">
 
 Inscription.afterRender = () => {
     console.log("afterRender exécuté");
+
     const btnSinscrire = document.getElementById('btnInscription');
+    
     let inputPhoto = document.getElementById("photo");
     let inputNom = document.getElementById("nom");
     let inputInsPassword = document.getElementById("passwordIns");
@@ -95,7 +97,6 @@ Inscription.afterRender = () => {
             console.log("inscrition");
             navigate('/home');
         }
-
     });
 };
 

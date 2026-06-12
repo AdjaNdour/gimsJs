@@ -2,16 +2,28 @@ import Service from "./service.js";
 
 class AuthService {
 
+    static currentUser = null;
+    
     async connexion(email, password) {
         if (!email || !password) return null;
+
         const users = await Service.get("users");
-        const user = users.find(u =>
-            u.email.toLowerCase() === email.toLowerCase() &&
-            u.password === password
-        );
+
+        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password );
+
         if (!user) return null;
-        localStorage.setItem("user", JSON.stringify(user));
+
+        AuthService.currentUser = user;
+        
         return user;
+    }
+
+    static getUserConnect() {
+        return AuthService.currentUser;
+    }
+
+    deconnexion() {
+        AuthService.currentUser = null;
     }
 
     async inscription(nom, photo, email, password, passwordConf) {
@@ -26,18 +38,7 @@ class AuthService {
             password,
             role: "client"
         };
-        const created = await Service.add("users", newUser);
-        localStorage.setItem("user", JSON.stringify(created));
-        return created;
-    }
-
-    deconnexion() {
-        localStorage.removeItem("user");
-    }
-    
-    static getUserConnect() {
-        console.log(localStorage.getItem("user"));
-        return JSON.parse(localStorage.getItem("user"));
+        return await Service.add("users", newUser);
     }
 }
 

@@ -65,7 +65,7 @@ Login.afterRender = () => {
         );
         if (userConnect) {
             console.table(userConnect);
-            console.log("connexion");
+            console.log("connexion reussi !!!");
             navigate('/home');
         }
 

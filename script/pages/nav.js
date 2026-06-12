@@ -1,16 +1,17 @@
 import { navigate } from '../router.js';
 import AuthService from "../services/auth.services.js";
 const authService = new AuthService();
-// const userConnect = AuthService.getUserConnect();
 
-const Nav = () => ` 
-        <div>
+const Nav = () => {
+    const userConnect = AuthService.getUserConnect();
+
+    return ` <div>
             <h2>Gim's Finder</h2>
             <div class="userConnect">
-                <img class="avatar" style="background-size: cover" src=""></img>
+                <img class="avatar" style="background-size: cover" src="${userConnect?.photo ?? ''}"></img>
                 <div>
-                    <h3 id="userName">kiki</h3>
-                    <p id="userEmail">kiki@gmail.xcom</p>
+                    <h3 id="userName">${userConnect?.nom ?? ''}</h3>
+                    <p id="userEmail">${userConnect?.email ?? ''}</p>
                 </div>
             </div> 
          
@@ -65,9 +66,10 @@ const Nav = () => `
 
         <button class="logout jcc" id="btnDeconnexion">Déconnexion</button>
 `;
+}
 
 Nav.afterRender = () => {
-    const btnDeconnexion = document.getElementById("btnDeconnexion");
+    let btnDeconnexion = document.getElementById("btnDeconnexion");
     let inputPhoto = document.getElementById("photo");
     let inputNom = document.getElementById("nom");
     let inputPassword = document.getElementById("password");
