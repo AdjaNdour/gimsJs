@@ -5,7 +5,7 @@ const routes = {
     "/connexion": "login",
     "/inscription": "inscription",
     "/home": "home",
-    "/profile": "profile",
+    "/profile": "profil",
     "/mesClients": "mesClients",
     "/emploieDuTemps": "emploieDuTemps"
 };
