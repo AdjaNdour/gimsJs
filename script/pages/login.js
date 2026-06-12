@@ -70,12 +70,9 @@ Login.afterRender = () => {
         }
 
     });
-
-
     lienIns?.addEventListener('click', () => {
         navigate('/inscription');
     });
 };
-
 
 export default Login;

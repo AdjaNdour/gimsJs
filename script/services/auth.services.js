@@ -8,13 +8,10 @@ class AuthService {
         if (!email || !password) return null;
 
         const users = await Service.get("users");
-
         const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password );
-
         if (!user) return null;
 
         AuthService.currentUser = user;
-        
         return user;
     }
 
