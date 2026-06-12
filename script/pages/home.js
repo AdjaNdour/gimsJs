@@ -58,7 +58,7 @@ const Home = async () => {
 
 
 Home.afterRender = () => {
-    
+
 
 };
 

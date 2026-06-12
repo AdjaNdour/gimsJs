@@ -1,3 +1,5 @@
+import Nav from "./pages/nav.js";
+
 const routes = {
     "/": "intro",
     "/connexion": "login",
@@ -7,13 +9,13 @@ const routes = {
     "/mesClients": "mesClients",
     "/emploieDuTemps": "emploieDuTemps"
 };
-import Nav from "./pages/nav.js";
+
 const render = async (path) => {
-    console.log(path);
+
     const app = document.querySelector('main');
     if (!app) return;
+
     const pageName = routes[path];
-    console.log(pageName);
 
     let pageModule;
 
@@ -25,11 +27,12 @@ const render = async (path) => {
         }
 
         const pageComponent = pageModule.default;
-        app.innerHTML = pageComponent();
 
-        if (pageComponent.afterRender) {
-            pageComponent.afterRender();
-        }
+        // 🔥 IMPORTANT FIX
+        const html = await pageComponent();
+        app.innerHTML = html;
+
+        pageComponent.afterRender?.();
 
         const sidebar = document.querySelector(".sidebar");
 
@@ -43,13 +46,11 @@ const render = async (path) => {
                 Nav.afterRender?.();
             }
         }
-        
+
     } catch (error) {
-        console.error(`Erreur de chargement : ${error}`);
+        console.error(error);
         app.innerHTML = '<h1>Erreur technique</h1>';
     }
-
-
 };
 
 const navigate = (path) => {
