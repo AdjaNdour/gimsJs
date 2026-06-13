@@ -10,7 +10,7 @@ const Home = async () => {
 
                 <div class="home-left">
                     <img src="${salle.images[0]}" alt="Gym">
-                    <h3>${salle.nom}</h3>
+                    <h3>${salle.nom} - ${salle.adresse} </h3>  
                     <span>${salle.prix} / mois</span>
                 </div>
 

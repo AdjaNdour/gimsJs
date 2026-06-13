@@ -6,7 +6,9 @@
             "nom": "Coura",
             "email": "kiki@gmail.com",
             "password": "kiki",
-            "role": "client"
+            "role": "client",
+            "description":""
+
         },
         {
             "id": "2",
@@ -14,15 +16,26 @@
             "nom": "youssou",
             "email": "youssou@gmail.com",
             "password": "youssou",
-            "role": "client"
+            "role": "client",
+            "description":""
         },
         {   
             "id": "3",
-            "nom": "lola",
+            "nom": "lola ndiaye",
             "photo": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
             "email": "lola@gmail.com",
             "password": "lola",
-            "role": "coach"
+            "role": "coach",
+            "description":"coach en Fitness depuis 3 ans"
+        },
+        {   
+            "id": "4",
+            "nom": "lili belle",
+            "photo": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg",
+            "email": "lili@gmail.com",
+            "password": "lili",
+            "role": "coach",
+            "description":"coach en Fitness depuis 3 ans"
         }
     ],
     "salles": [
@@ -33,6 +46,9 @@
             "prix": 10000,
             "description": "Découvrez kay trun, une salle de sport moderne de 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique, 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
             "equipements": [
+                "Tapis",
+                "Vélos",
+                "Haltères",
                 "Tapis",
                 "Vélos",
                 "Haltères"
@@ -59,17 +75,19 @@
             "equipements": [
                 "Tapis",
                 "Vélos",
+                "Haltères",
+                "Tapis",
+                "Vélos",
                 "Haltères"
             ],
-            "coachId":"3",
+            "coachId":"4",
             "images": [
                 "https://i.pinimg.com/1200x/40/e6/c5/40e6c5f5681473f4914d7a5b98245cdd.jpg",
                 "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg",
                 "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg",
                 "https://i.pinimg.com/1200x/40/e6/c5/40e6c5f5681473f4914d7a5b98245cdd.jpg",
                 "https://i.pinimg.com/736x/48/96/c2/4896c29a479322f05bf34cb69393ba4a.jpg"
-            ],
-            "photoPrincipal": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg"
+            ]
         },
         {
             "id": "3",
@@ -89,8 +107,7 @@
                 "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg",
                 "https://i.pinimg.com/1200x/40/e6/c5/40e6c5f5681473f4914d7a5b98245cdd.jpg",
                 "https://i.pinimg.com/736x/48/96/c2/4896c29a479322f05bf34cb69393ba4a.jpg"
-            ],
-            "photoPrincipal": "https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg"
+            ]
         }
     ],
 

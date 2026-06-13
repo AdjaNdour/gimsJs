@@ -3,7 +3,9 @@ import AuthService from "../services/auth.services.js";
 
 const authService = new AuthService();
 
-const Inscription = () => `  <section id="inscription" class="page active"> 
+const Inscription = () => `  
+        
+        <section id="inscription" class="page active"> 
 
             <div class="inscription-page">
 

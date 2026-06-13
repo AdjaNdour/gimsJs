@@ -1,0 +1,134 @@
+.abonnement-page{
+    padding:20px;
+}
+
+.abonnement-title{
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.abonnement-form{
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:15px;
+    padding:20px;
+}
+
+.abonnement-group{
+    margin-bottom:20px;
+}
+
+.abonnement-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#222;
+}
+
+.abonnement-group input,
+.abonnement-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+.abonnement-group textarea{
+    min-height:160px;
+    resize:none;
+}
+
+.abonnement-content{
+    display:flex;
+    gap:25px;
+    margin-top:20px;
+}
+
+.abonnement-objectif{
+    flex:1;
+}
+
+.abonnement-paiement{
+    flex:1;
+}
+
+.abonnement-paiement h3{
+    font-size:18px;
+}
+
+.abonnement-qr-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.abonnement-qr-container img{
+    width:160px;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid #e5e5e5;
+}
+
+.abonnement-salle{
+    margin-top:25px;
+}
+
+.abonnement-salle h2{
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.abonnement-prix{
+    color:#ff6200;
+    font-size:22px;
+    font-weight:700;
+}
+
+.abonnement-btn{
+    width:100%;
+    border:none;
+    background:#ff6200;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:20px;
+    transition:.3s;
+    display:flex;
+    justify-content:center;
+}
+
+.abonnement-btn:hover{
+    opacity:.9;
+}
+
+@media(max-width:768px){
+
+    .abonnement-content{
+        flex-direction:column;
+    }
+
+    .abonnement-qr-container{
+        flex-wrap:wrap;
+    }
+
+    .abonnement-salle h2{
+        font-size:24px;
+    }
+
+    .abonnement-prix{
+        font-size:18px;
+    }
+}
+
+h3{
+    margin: 12px 0 12px 4px;
+}

@@ -6,8 +6,11 @@ const DetailsSalle = async (id) => {
     const gallery = (salle.images || []).slice(1).map(image => `
                                                 <img src="${image}" alt="">
                                                 `).join("");
-    
 
+    const users = await Service.getAll("users");
+    const coachs = users.filter(coach => coach.role === "coach") ;
+    const coach = coachs.find(coach => coach.id === salle.coachId) ;
+    
     return `
         <section class="detail-page  margin padd">
 
@@ -18,11 +21,11 @@ const DetailsSalle = async (id) => {
             <div class="detail-coach-card">
 
                 <div class="detail-coach-left">
-                    <img src="https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg" alt="Coach">
+                    <img src="${coach.photo}" alt="Coach">
 
                     <div class="detail-coach-info">
-                        <h4>Marcus Chen</h4>
-                        <p>Olympic Lifting • 0.5 mi</p>
+                        <h4>${coach.nom}</h4>
+                        <p>${coach.description}</p>
                     </div>
                 </div>
 
@@ -37,19 +40,26 @@ const DetailsSalle = async (id) => {
             <div class="detail-gym-info">
 
                 <h1 class="detail-gym-name">
-                    ${salle.nom}
-                </h1>
+                    ${salle.nom} -  ${salle.adresse}📍
+                </h1>                           
 
                 <div class="detail-gym-price">
-                    📍 ${salle.prix} FCFA / mois
+                     ${salle.prix} FCFA / mois
                 </div>
 
-                <button class="detail-subscribe-btn">
+                <button class="detail-subscribe-btn" data-id="${salle.id}">
                     S'abonner
                 </button>
 
             </div>
-
+                <div class="detail-coach-card">
+                    <div class="detail-coach-left">
+                        <div class="detail-coach-info">
+                            <h2> Equipements</h2>
+                            <p> ${salle.equipements} </p>
+                        </div>
+                    </div>
+                </div>
             <div class="detail-description">
 
                 <h3>Description</h3>
@@ -72,4 +82,11 @@ const DetailsSalle = async (id) => {
     `;
 };
 
+DetailsSalle.afterRender = () => {
+    let subscribe = document.querySelector(".detail-subscribe-btn");
+        subscribe.addEventListener("click", () =>{
+            const id = subscribe.dataset.id;
+            location.hash = `subscription/${id}`;
+        });
+}
 export default DetailsSalle;
