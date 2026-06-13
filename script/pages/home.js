@@ -5,12 +5,11 @@ const Home = async () => {
     const salles = await Service.getAll("salles");
 
     const sallesHTML = salles.map(salle => `
-        <article class="home-gym-card">
-
+        <article class="home-gym-card" data-id="${salle.id}">
             <div class="home-card-content">
 
                 <div class="home-left">
-                    <img src="${salle.photoPrincipal}" alt="Gym">
+                    <img src="${salle.images[0]}" alt="Gym">
                     <h3>${salle.nom}</h3>
                     <span>${salle.prix} / mois</span>
                 </div>
@@ -30,7 +29,7 @@ const Home = async () => {
     `).join("");
 
     return `
-        <section id="home" class="page active home-margin home-padd">
+        <section id="home" class="page active margin padd">
 
             <div class="home-search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -62,6 +61,16 @@ const Home = async () => {
     `;
 };
 
-Home.afterRender = () => {};
+Home.afterRender = () => {
+
+    let salles = document.querySelectorAll(".home-gym-card");
+    salles.forEach(card => {
+            card.addEventListener("click", () => {
+                const id = card.dataset.id;
+                location.hash = `detailsSalle/${id}`;
+            });
+        });
+
+};
 
 export default Home;

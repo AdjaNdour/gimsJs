@@ -7,10 +7,22 @@ const routes = {
     "/home": "home",
     "/profile": "profil",
     "/mesClients": "mesClients",
-    "/emploieDuTemps": "emploieDuTemps"
+    "/emploieDuTemps": "emploieDuTemps",
+    "/detailsSalle": "detailsSalle"
 };
 
-const render = async (path) => {
+const handleHashChange = async () => {
+    const fullPath = window.location.hash.replace('#', '') || '/';
+
+    const parts = fullPath.split('/').filter(Boolean);
+
+    const basePath = '/' + (parts[0] || '');
+    const param = parts[1] || null;
+
+    await render(basePath, param);
+};
+
+const render = async (path, param = null) => {
 
     const app = document.querySelector('main');
     if (!app) return;
@@ -18,6 +30,19 @@ const render = async (path) => {
     const pageName = routes[path];
 
     let pageModule;
+    const sidebar = document.querySelector(".sidebar");
+
+    if (sidebar) {
+
+        if (path === "/" || path === "/connexion" || path === "/inscription") {
+            sidebar.innerHTML = "";
+            sidebar.style.display = "none";
+        } else {
+            sidebar.style.display = "block";
+            sidebar.innerHTML = Nav();
+            Nav.afterRender?.();
+        }
+    }
 
     try {
         if (!pageName) {
@@ -28,24 +53,10 @@ const render = async (path) => {
 
         const pageComponent = pageModule.default;
 
-        // 🔥 IMPORTANT FIX
-        const html = await pageComponent();
+        const html = await pageComponent(param);
         app.innerHTML = html;
 
-        pageComponent.afterRender?.();
-
-        const sidebar = document.querySelector(".sidebar");
-
-        if (sidebar) {
-            if (path === "/" || path === "/connexion" || path === "/inscription") {
-                sidebar.innerHTML = "";
-                sidebar.style.display = "none";
-            } else {
-                sidebar.style.display = "block";
-                sidebar.innerHTML = Nav();
-                Nav.afterRender?.();
-            }
-        }
+        pageComponent.afterRender?.(param);
 
     } catch (error) {
         console.error(error);
@@ -55,11 +66,6 @@ const render = async (path) => {
 
 const navigate = (path) => {
     window.location.hash = path;
-};
-
-const handleHashChange = async () => {
-    const path = window.location.hash.replace('#', '') || '/';
-    await render(path);
 };
 
 const initRouter = () => {

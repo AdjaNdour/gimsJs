@@ -5,6 +5,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.margin {
+    margin-left: 280px; 
+}
+
+.padd {
+    padding: 20px;
+}
+
 :root {
     --primary-color: #ff6b21;
     --secondary-color: #011a36;

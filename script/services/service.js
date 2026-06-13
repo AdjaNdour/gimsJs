@@ -7,14 +7,20 @@ class Service {
         return await res.json();
     }
 
+    static async getById(endpoint, id) {
+        const res = await fetch(`${API_URL}/${endpoint}/${id}`);
+        if (!res.ok) {
+            throw new Error("Ressource introuvable");
+        }
+        return await res.json();
+    }
+
     static async getAll(endpoint) {
         try {
             const res = await fetch(`${API_URL}/${endpoint}`);
-
             if (!res.ok) {
                 throw new Error(`Erreur HTTP: ${res.status}`);
             }
-
             return await res.json();
         } catch (error) {
             console.error("Erreur API:", error);
@@ -28,7 +34,6 @@ class Service {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
-
         return await res.json();
     }
 }
