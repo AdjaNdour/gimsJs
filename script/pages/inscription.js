@@ -22,12 +22,14 @@ const Inscription = () => `
                     <form id="inscriptionForm">
 
                         <div class="input-group">
-                            <label>url Photo</label>
+                            <label>Url Photo</label>
 
                             <div class="input-box">
                                 <i class="fa-regular fa-user"></i>
                                 <input type="text" id="photo" placeholder="url photo">
                             </div>
+
+                            <small id="photoError" class="error-message"></small>
                         </div>
 
                         <div class="input-group">
@@ -37,6 +39,8 @@ const Inscription = () => `
                                 <i class="fa-regular fa-user"></i>
                                 <input type="text" id="nom" placeholder="veuillez entrer votre nom">
                             </div>
+
+                            <small id="nomError" class="error-message"></small>
                         </div>
 
                         <div class="input-group">
@@ -46,6 +50,8 @@ const Inscription = () => `
                                 <i class="fa-regular fa-envelope"></i>
                                 <input type="email" id="emailIns" placeholder="veuillez entrer votre mail">
                             </div>
+
+                            <small id="emailError" class="error-message"></small>
                         </div>
 
                         <div class="input-group">
@@ -55,18 +61,24 @@ const Inscription = () => `
                                 <i class="fa-solid fa-lock"></i>
                                 <input type="password" id="passwordIns" placeholder="veuillez entrer votre mot de passe">
                             </div>
+
+                            <small id="passwordError" class="error-message"></small>
                         </div>
-                    
+
                         <div class="input-group">
-                            <label>Mot de passe</label>
+                            <label>Confirmation mot de passe</label>
 
                             <div class="input-box">
                                 <i class="fa-solid fa-lock"></i>
-                                <input type="password" id="passwordInsConf" placeholder="veuillez entrer votre mot de passe">
+                                <input type="password" id="passwordInsConf" placeholder="confirmez votre mot de passe">
                             </div>
+
+                            <small id="passwordConfError" class="error-message"></small>
                         </div>
 
-                        <button type="submit" id="btnInscription">s'inscrire</button>
+                        <button type="submit" id="btnInscription">
+                            S'inscrire
+                        </button>
 
                     </form>
 
@@ -79,23 +91,88 @@ const Inscription = () => `
 
 Inscription.afterRender = () => {
     console.log("INSCRIPTION AFTER RENDER OK");
-    const btnSinscrire = document.getElementById('btnInscription');
+    const form = document.querySelector('form');
 
-    let inputPhoto = document.getElementById("photo");
-    let inputNom = document.getElementById("nom");
-    let inputInsPassword = document.getElementById("passwordIns");
-    let inputInsPasswordConf = document.getElementById("passwordInsConf");
-    let inputInsEmail = document.getElementById("emailIns");
-
-    btnSinscrire?.addEventListener("click", async function (e) {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let user = await authService.inscription(
-            inputNom.value.trim(),
-            inputPhoto.value.trim(),
-            inputInsEmail.value.trim(),
-            inputInsPassword.value.trim(),
-            inputInsPasswordConf.value.trim()
+
+        const inputPhoto = document.getElementById("photo");
+        const inputNom = document.getElementById("nom");
+        const inputInsPassword = document.getElementById("passwordIns");
+        const inputInsPasswordConf = document.getElementById("passwordInsConf");
+        const inputInsEmail = document.getElementById("emailIns");
+
+        const photo = inputPhoto.value.trim();
+        const nom = inputNom.value.trim();
+        const pass = inputInsPassword.value.trim();
+        const passConf = inputInsPasswordConf.value.trim();
+        const email = inputInsEmail.value.trim();
+
+        document.querySelectorAll(".error-message").forEach(el => {
+            el.textContent = "";
+        });
+
+        document.querySelectorAll(".input-box").forEach(el => {
+            el.classList.remove("error");
+        });
+
+        let hasError = false;
+
+        if (photo === "") {
+            inputPhoto.parentElement.classList.add("error");
+            document.getElementById("photoError").textContent =
+                "L'url photo est obligatoire";
+            hasError = true;
+        }
+
+        if (nom === "") {
+            inputNom.parentElement.classList.add("error");
+            document.getElementById("nomError").textContent =
+                "Le nom est obligatoire";
+            hasError = true;
+        }
+
+        if (email === "") {
+            inputInsEmail.parentElement.classList.add("error");
+            document.getElementById("emailError").textContent =
+                "L'email est obligatoire";
+            hasError = true;
+        }
+
+        if (pass === "") {
+            inputInsPassword.parentElement.classList.add("error");
+            document.getElementById("passwordError").textContent =
+                "Le mot de passe est obligatoire";
+            hasError = true;
+        }
+
+        if (passConf === "") {
+            inputInsPasswordConf.parentElement.classList.add("error");
+            document.getElementById("passwordConfError").textContent =
+                "La confirmation est obligatoire";
+            hasError = true;
+        }
+
+        if (pass !== "" && passConf !== "" && pass !== passConf) {
+            inputInsPassword.parentElement.classList.add("error");
+            inputInsPasswordConf.parentElement.classList.add("error");
+
+            document.getElementById("passwordConfError").textContent =
+                "Les mots de passe ne correspondent pas";
+
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        const user = await authService.inscription(
+            nom,
+            photo,
+            email,
+            pass,
+            passConf
         );
+
         if (user) {
             navigate('/home');
         }

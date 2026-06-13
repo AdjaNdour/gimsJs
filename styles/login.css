@@ -56,7 +56,6 @@ label {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
     padding: 10px;
     border-radius: 8px;
 }
@@ -87,4 +86,21 @@ label {
     font-weight: bold;
     padding: 15px;
 
+}
+
+.error-message{
+    color:#ff4d4f;
+    font-size:12px;
+    min-height:16px;
+    margin-top:4px;
+    font-weight:500;
+}
+
+.input-box.error{
+    border:2px solid #ff4d4f;
+    box-shadow:0 0 8px rgba(255,77,79,.25);
+}
+
+.input-box.error input{
+    background:#fff5f5;
 }
