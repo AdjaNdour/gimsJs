@@ -66,6 +66,14 @@
     gap:20px;
 }
 
+.bg-blue{
+    background-color: #4589e2;
+}
+
+.bg-orange{
+    background-color: #fe8930;
+}
+
 .abonnement-qr-container img{
     width:160px;
     height:160px;

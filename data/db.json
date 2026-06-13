@@ -44,6 +44,8 @@
             "nom": "Zenith Wellness",
             "adresse": "Dakar",
             "prix": 10000,
+            "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",
+            "qrOrange": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=OrangeMoney-774799479",
             "description": "Découvrez kay trun, une salle de sport moderne de 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique, 100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
             "equipements": [
                 "Tapis",
@@ -71,6 +73,8 @@
             "nom": "Abdolisation hihi Fit",
             "adresse": "Dakar",
             "prix": 12000,
+            "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",
+            "qrOrange": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=OrangeMoney-774799479",    
             "description": "tant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique,  100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
             "equipements": [
                 "Tapis",
@@ -94,6 +98,8 @@
             "nom": "Fitness Fit",
             "adresse": "Dakar",
             "prix": 8000,
+            "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",
+            "qrOrange": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=OrangeMoney-774799479",
             "description": "tant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique,  100 m² conçue pour tous les niveaux, du débutant à l'athlète confirmé.Notre espace se distingue par une zone de musculation équipée de matériel professionnel et un vaste plateau cardio avec vue panoramique.",
             "equipements": [
                 "Tapis",

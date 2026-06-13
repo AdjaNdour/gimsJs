@@ -1,9 +1,13 @@
 import Service from "../services/service.js";
 
+const Subscription = async (salleId) => {
 
-const Subscription = async () => {
+    const salle = Service.get("salles", salleId);
 
-      return `
+    const qrWave = `scan.html?type=wave&salleId=${salleId}`;
+    const qrOrange = `scan.html?type=orange&salleId=${salleId}`;
+
+    return `
      <section class="abonnement-page margin padd">
 
     <h1 class="abonnement-title">ABONNEMENT</h1>
@@ -32,8 +36,8 @@ const Subscription = async () => {
             <div class="abonnement-paiement">
                 <h3>QR de Paiement</h3>
                 <div class="abonnement-qr-container">
-                    <img src="https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg" alt="QR Code">
-                    <img src="https://i.pinimg.com/736x/d7/89/ab/d789abc5c5a0398edf4b4c2e0385f69b.jpg" alt="QR Code">
+                    <div id="qrWave"></div>
+                    <div id="qrOrange"></div>
                 </div>
 
             </div>
@@ -58,7 +62,41 @@ const Subscription = async () => {
 }
 
 Subscription.afterRender = () => {
-    
-}
 
+    const baseUrl = "http://172.20.10.6:5500";
+
+    const hash = window.location.hash.replace("#", "");
+    const parts = hash.split("/");
+
+    const salleId = parts[1];
+
+    console.log("HASH =", hash);
+    console.log("Salle ID =", salleId);
+
+    if (!salleId) {
+        console.error("Salle ID manquant dans le router !");
+        return;
+    }
+
+    const waveEl = document.getElementById("qrWave");
+    const orangeEl = document.getElementById("qrOrange");
+
+    if (!waveEl || !orangeEl) return;
+
+    waveEl.innerHTML = "";
+    orangeEl.innerHTML = "";
+
+new QRCode(waveEl, {
+    text: `${baseUrl}/scan.html?salleId=${salleId}`,
+    width: 150,
+    height: 150
+});
+
+new QRCode(orangeEl, {
+    text: `${baseUrl}/scan.html?salleId=${salleId}`,
+    width: 150,
+    height: 150
+});
+
+};
 export default Subscription;

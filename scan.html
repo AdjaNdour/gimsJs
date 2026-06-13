@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scan paiement</title>
+    <link rel="stylesheet" href="/styles/scan.css">
+</head>
+
+<body>
+
+    <div class="scan-container">
+
+        <div class="scan-card">
+
+            <div class="scan-title">
+                📲 Scan de paiement
+            </div>
+
+            <div class="scan-info" id="info">
+                Chargement...
+            </div>
+
+            <button class="scan-btn" id="payBtn">
+                Valider paiement
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <h2 id="modalText"></h2>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="/script/scan.js"> </script>
+
+</body>
+
+</html>
