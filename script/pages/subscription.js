@@ -15,13 +15,8 @@ const Subscription = async (salleId) => {
     <form class="abonnement-form">
 
         <div class="abonnement-group">
-            <h3>Email de connexion</h3>
-            <input type="email" placeholder="veuillez entrer votre mail">
-        </div>
-
-        <div class="abonnement-group">
             <h3>Votre adresse</h3>
-            <input type="text" placeholder="votre adresse">
+            <input id="adresse" type="text" placeholder="votre adresse">
         </div>
 
         <div class="abonnement-content">
@@ -29,7 +24,7 @@ const Subscription = async (salleId) => {
             <div class="abonnement-objectif">
                 <div class="abonnement-group">
                     <h3>Votre objectif</h3>
-                    <textarea placeholder="veillez décrire vos objectifs"></textarea>
+                    <textarea id="objectif" placeholder="veillez décrire vos objectifs"></textarea>
                 </div>
             </div>
 
@@ -86,17 +81,39 @@ Subscription.afterRender = () => {
     waveEl.innerHTML = "";
     orangeEl.innerHTML = "";
 
-new QRCode(waveEl, {
-    text: `${baseUrl}/scan.html?salleId=${salleId}`,
-    width: 150,
-    height: 150
-});
+    new QRCode(waveEl, {
+        text: `${baseUrl}/scan.html?salleId=${salleId}`,
+        width: 150,
+        height: 150
+    });
 
-new QRCode(orangeEl, {
-    text: `${baseUrl}/scan.html?salleId=${salleId}`,
-    width: 150,
-    height: 150
-});
+    new QRCode(orangeEl, {
+        text: `${baseUrl}/scan.html?salleId=${salleId}`,
+        width: 150,
+        height: 150
+    });
+
+    const form = document.querySelector(".abonnement-form");
+    const inputAdresse = document.getElementById("adresse");
+    const inputObjectif = document.getElementById("objectif");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const adresse = inputAdresse.value.trim();
+        const objectif = inputObjectif.value.trim();
+
+        if (adresse === "" || objectif === "") {
+            if (adresse === "") inputAdresse.style.border = "2px solid red";
+            if (objectif === "") inputObjectif.style.border = "2px solid red";
+            return;
+        }
+
+        inputAdresse.style.border = "1px solid #ddd";
+        inputObjectif.style.border = "1px solid #ddd";
+
+        
+    });
 
 };
 export default Subscription;
