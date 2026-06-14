@@ -1,6 +1,6 @@
 import { initRouter } from './router.js';
 import Nav from "./pages/nav.js";
-
+import AuthService from './services/auth.services.js';
 document.addEventListener("DOMContentLoaded", () => {
 
     const sidebar = document.querySelector(".sidebar");
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     initRouter();
+    AuthService.init();
 });
 
 

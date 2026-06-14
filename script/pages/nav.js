@@ -5,6 +5,10 @@ const authService = new AuthService();
 const Nav = () => {
     const userConnect = AuthService.getUserConnect();
 
+    if (!userConnect) {
+        return `<p>Utilisateur non connecté</p>`;
+    }
+
     return ` <div>
             <h2>Gim's Finder</h2>
             <div class="userConnect">
@@ -70,6 +74,7 @@ const Nav = () => {
 
 Nav.afterRender = () => {
     let btnDeconnexion = document.getElementById("btnDeconnexion");
+
     let inputPhoto = document.getElementById("photo");
     let inputNom = document.getElementById("nom");
     let inputPassword = document.getElementById("password");
@@ -77,24 +82,27 @@ Nav.afterRender = () => {
     let inputInsPassword = document.getElementById("passwordIns");
     let inputInsPasswordConf = document.getElementById("passwordInsConf");
     let inputInsEmail = document.getElementById("emailIns");
+    if (btnDeconnexion) {
+        btnDeconnexion.addEventListener("click", async function (e) {
+            e.preventDefault();
+            await authService.deconnexion();
+            [
+                inputEmail,
+                inputPassword,
+                inputNom,
+                inputInsEmail,
+                inputInsPassword,
+                inputInsPasswordConf,
+                inputPhoto
 
-    btnDeconnexion.addEventListener("click", async function (e) {
-        e.preventDefault();
-        await authService.deconnexion();
-        [
-            inputEmail,
-            inputPassword,
-            inputNom,
-            inputInsEmail,
-            inputInsPassword,
-            inputInsPasswordConf,
-            inputPhoto
-        ].forEach(input => {
-            if (input) input.value = "";
+            ].forEach(input => {
+                if (input) input.value = "";
+            });
+            navigate("/connexion");
+
         });
-        navigate("/connexion");
+    }
 
-    });
 
     document.querySelectorAll("[data-page]").forEach(btn => {
         btn.addEventListener("click", () => {

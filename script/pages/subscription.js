@@ -111,8 +111,9 @@ Subscription.afterRender = () => {
 
         inputAdresse.style.border = "1px solid #ddd";
         inputObjectif.style.border = "1px solid #ddd";
+        inputAdresse.value = "";
+        inputObjectif.value = "";
 
-        
     });
 
 };

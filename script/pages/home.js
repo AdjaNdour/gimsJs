@@ -33,7 +33,7 @@ const Home = async () => {
 
             <div class="home-search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search coaches, gyms, or sports...">
+                <input type="text" id="search" placeholder="Search gyms, or sports prices ...">
             </div>
 
             <div class="home-filters">
@@ -65,11 +65,39 @@ Home.afterRender = () => {
 
     let salles = document.querySelectorAll(".home-gym-card");
     salles.forEach(card => {
-            card.addEventListener("click", () => {
-                const id = card.dataset.id;
-                location.hash = `detailsSalle/${id}`;
-            });
+        card.addEventListener("click", () => {
+            const id = card.dataset.id;
+            location.hash = `detailsSalle/${id}`;
         });
+    });
+
+    const input = document.querySelector("#search");
+    const cards = document.querySelectorAll(".home-gym-card");
+
+    if (!input) return;
+
+    input.addEventListener("input", () => {
+
+        const searchTerm = input.value.toLowerCase();
+
+        cards.forEach(card => {
+
+            const title = card.querySelector("h3")?.textContent.toLowerCase() || "";
+            const price = card.querySelector("span")?.textContent.toLowerCase() || "";
+            const description = card.querySelector(".home-right p")?.textContent.toLowerCase() || "";
+
+            if (
+                title.includes(searchTerm) ||
+                price.includes(searchTerm) ||
+                description.includes(searchTerm)
+            ) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+    });
 
 };
 
