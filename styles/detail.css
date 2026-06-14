@@ -99,7 +99,6 @@
     border:1px solid #e5e5e5;
     border-radius:15px;
     padding:20px;
-    margin:25px 0;
     background:#fff;
 }
 
@@ -184,4 +183,30 @@
         width:100%;
         text-align:left;
     }
+}
+.edit-btn {
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #ff6200;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e5e5e5;
+    font-weight: bold;
+}
+.detail-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;    
+}
+
+.bgcp{
+    padding:20px;
+    margin:25px 0;
+    background:#fff;
+    border-radius: 10px;
+    border:  1px solid rgb(231, 231, 231);
 }

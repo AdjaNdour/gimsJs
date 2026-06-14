@@ -67,15 +67,17 @@ const DetailsSalle = async (id) => {
 
             </div>
 
-            <div class="detail-gallery-header">
-                <h2>Featured Gym</h2>
-            </div>
+            <div class="bgcp"> 
+                <div class="detail-title-row ">
+                    <h2>Featured Gym</h2>
+                </div>
 
-            <div class="detail-gallery">
-                <img src="${salle.images[0]}" alt="">
-            </div>    
-            <div class="detail-box-image"> 
-                    ${gallery} 
+                <div class="detail-gallery">
+                    <img src="${salle.images[0]}" alt="">
+                </div>    
+                <div class="detail-box-image"> 
+                        ${gallery} 
+                </div>
             </div>
 
         </section>

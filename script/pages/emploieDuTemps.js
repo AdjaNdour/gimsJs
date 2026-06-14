@@ -1,6 +1,55 @@
 import Service from "../services/service.js";
+import AuthService from "../services/auth.services.js";
 
 const EmploieDuTemps = async () => {
+
+    const user = AuthService.getUserConnect();
+    if (!user) return `<p>Non connecté</p>`;
+
+    const abonnements = await Service.getAll("abonnements");
+    const emplois = await Service.getAll("emploisDuTemps");
+
+    const monAbonnement = abonnements.find(a =>
+        String(a.clientId) === String(user.id) &&
+        a.statut === "actif"
+    );
+
+    if (!monAbonnement) {
+        return `<p>Aucun abonnement actif</p>`;
+    }
+
+    const monPlanning = emplois.filter(e =>
+        String(e.abonnementId) === String(monAbonnement.id)
+    );
+
+    const jours = {
+        lundi: [],
+        mardi: [],
+        mercredi: [],
+        jeudi: [],
+        vendredi: [],
+        samedi: [],
+        dimanche: []
+    };
+
+    monPlanning.forEach(p => {
+        const j = p.jour.toLowerCase();
+        if (jours[j]) jours[j].push(p);
+    });
+
+    const dayCard = (label, sessions) => `
+        <div class="monabo-day">
+            <h4>${label}</h4>
+
+            ${sessions.length > 0 ? sessions.map(s => `
+                <div class="monabo-session">
+                    <span>${s.heure}</span>
+                    <h3>${s.activite}</h3>
+                    <small>Coach</small>
+                </div>
+            `).join("") : ""}
+        </div>
+    `;
 
     return `
         <section class="monabo-page margin padd">
@@ -9,88 +58,20 @@ const EmploieDuTemps = async () => {
 
                 <div class="monabo-header">
                     <h2>Cette Semaine</h2>
-                    <p>vous avez 5 séances</p>
+                    <p>vous avez ${monPlanning.length} séances</p>
                 </div>
 
                 <div class="monabo-calendar">
-
-                    <div class="monabo-day">
-                        <h4>MON</h4>
-
-                        <div class="monabo-session">
-                            <span>06:00 AM</span>
-                            <h3>Iron Rise</h3>
-                            <small>Coach Jax</small>
-                        </div>
-                    </div>
-
-                    <div class="monabo-day">
-                        <h4>TUE</h4>
-
-                        <div class="monabo-session">
-                            <span>06:00 PM</span>
-                            <h3>Box & Burn</h3>
-                            <small>Coach Roy</small>
-                        </div>
-                    </div>
-
-                    <div class="monabo-day">
-                        <h4>WED</h4>
-                    </div>
-
-                    <div class="monabo-day">
-                        <h4>THU</h4>
-
-                        <div class="monabo-session active">
-                            <span>08:00 AM</span>
-                            <h3>Pro Seminar</h3>
-                            <small>Dr. Aris</small>
-                        </div>
-                    </div>
-
-                    <div class="monabo-day">
-                        <h4>FRI</h4>
-
-                        <div class="monabo-session">
-                            <span>06:00 AM</span>
-                            <h3>Iron Rise</h3>
-                            <small>Coach Jax</small>
-                        </div>
-                    </div>
-
-                    <div class="monabo-day">
-                        <h4>SAT</h4>
-
-                        <div class="monabo-session">
-                            <span>09:00 AM</span>
-                            <h3>Weekend Warrior</h3>
-                            <small>All staff</small>
-                        </div>
-                    </div>
-
+                    ${dayCard("MON", jours.lundi)}
+                    ${dayCard("TUE", jours.mardi)}
+                    ${dayCard("WED", jours.mercredi)}
+                    ${dayCard("THU", jours.jeudi)}
+                    ${dayCard("FRI", jours.vendredi)}
+                    ${dayCard("SAT", jours.samedi)}
+                    ${dayCard("SUN", jours.dimanche)}
                 </div>
 
             </div>
-
-            <div class="monabo-payment">
-
-                <h2>
-                    Il vous reste 20 jours avant le prochain paiement
-                </h2>
-
-                <div class="monabo-price">
-                    10000 f / mois
-                </div>
-
-                <p>
-                    en cas d'abandon nous ne rembourserons pas le paiement
-                </p>
-
-            </div>
-
-            <button class="monabo-btn">
-                Abandonner
-            </button>
 
         </section>
     `;

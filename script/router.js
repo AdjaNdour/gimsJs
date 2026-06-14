@@ -9,7 +9,8 @@ const routes = {
     "/mesClients": "mesClients",
     "/emploieDuTemps": "emploieDuTemps",
     "/detailsSalle": "detailsSalle",
-    "/subscription": "subscription"
+    "/subscription": "subscription",
+    "/maPage": "maPage"
 };
 
 const handleHashChange = async () => {
@@ -34,7 +35,7 @@ const render = async (path, param = null) => {
     const sidebar = document.querySelector(".sidebar");
 
     console.log(pageName);
-    
+
     if (sidebar) {
 
         if (path === "/" || path === "/connexion" || path === "/inscription") {
