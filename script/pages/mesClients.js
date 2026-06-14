@@ -1,74 +1,55 @@
 import Service from "../services/service.js";
 import AuthService from "../services/auth.services.js";
 
+let coach = null;
+let salle = null;
+
 const MesClients = async () => {
 
     const coachConnect = AuthService.getUserConnect();
-
-    if (!coachConnect) {
-        return `
-            <section class="page active margin padd">
-                <p>Utilisateur non connecté</p>
-            </section>
-        `;
-    }
+    if (!coachConnect) return `<p>Utilisateur non connecté</p>`;
 
     const users = await Service.getAll("users");
     const salles = await Service.getAll("salles");
     const abonnements = await Service.getAll("abonnements");
 
-    const salle = salles.find(s => String(s.coachId) === String(coachConnect.id));
+    salle = salles.find(s => String(s.coachId) === String(coachConnect.id));
 
-    if (!salle) {
-        return `
-            <section class="page active margin padd">
-                <p>Aucune salle trouvée pour ce coach.</p>
-            </section>
-        `;
-    }
+    if (!salle) return `<p>Aucune salle trouvée</p>`;
 
-    const mesAbonnements = abonnements.filter(abo => String(abo.salleId) === String(salle.id));
+    const mesAbos = abonnements.filter(a => String(a.salleId) === String(salle.id));
 
-    const mesClients = mesAbonnements.map(abo => {
-        const client = users.find(user => String(user.id) === String(abo.clientId));
+    const mesClients = mesAbos.map(abo => {
+        const client = users.find(u => String(u.id) === String(abo.clientId));
         return { ...abo, client };
     });
 
-    const clientsHTML = mesClients.map(abonnement => {
+    const html = mesClients.map(a => {
 
-        const client = abonnement.client;
-        if (!client) return "";
+        if (!a.client) return "";
+
         return `
             <article class="list-card">
 
                 <div class="list-left">
-
-                    <img src="${client.photo || ""}" alt="${client.nom}">
-
+                    <img src="${a.client.photo || ""}">
                     <div class="list-info">
-                        <h3>${client.nom || "Client"}</h3>
-                        <p>${client.email || ""}</p>
+                        <h3>${a.client.nom}</h3>
+                        <p>${a.client.email}</p>
                     </div>
-
                 </div>
 
                 <div class="list-right">
 
-                    <span class="list-days">
-                        15 jours restants
+                    <span class="list-days" data-id="${a.id}">
+                        ${a.days || 15} jours restants
                     </span>
 
-                    <button
-                        class="list-edit-btn"
-                        data-id="${abonnement.id}"
-                    >
-                        Modifier
+                    <button class="btn-edit-abo" data-id="${a.id}">
+                        Modifier abo
                     </button>
 
-                    <button
-                        class="list-cancel-btn"
-                        data-id="${abonnement.id}"
-                    >
+                    <button class="btn-delete-abo" data-id="${a.id}">
                         Abandon
                     </button>
 
@@ -76,50 +57,100 @@ const MesClients = async () => {
 
             </article>
         `;
-
     }).join("");
 
     return `
-        <section id="myList" class="page active margin padd">
-            <div class="home-search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search" placeholder="Search coaches, gyms, or sports...">
-            </div>
-            <div class="list-section-title">
-                <h2>Mes Clients</h2>
-            </div>
+        <section class="page active margin padd">
+
+            <h2>Mes Clients</h2>
+
             <div class="list-container">
-                ${mesClients.length > 0 ? clientsHTML : `<p>Aucun client abonné à votre salle.</p>`}
+                ${mesClients.length ? html : "<p>Aucun client</p>"}
             </div>
 
         </section>
     `;
 };
 
+async function updateAbonnement(id, data) {
+
+    const abonnements = await Service.getAll("abonnements");
+    const index = abonnements.findIndex(a => String(a.id) === String(id));
+
+    if (index === -1) return;
+
+    const updated = { ...abonnements[index], ...data };
+
+    await fetch(`http://localhost:3000/abonnements/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated)
+    });
+}
+
+async function deleteAbonnement(id) {
+
+    await fetch(`http://localhost:3000/abonnements/${id}`, {
+        method: "DELETE"
+    });
+}
+
 MesClients.afterRender = () => {
 
-    const input = document.querySelector("#search");
+    document.querySelectorAll(".btn-edit-abo").forEach(btn => {
 
-    if (!input) return;
+        btn.addEventListener("click", () => {
 
-    input.addEventListener("input", () => {
+            const id = btn.dataset.id;
+            const el = btn.closest(".list-card").querySelector(".list-days");
 
-        const searchTerm = input.value.toLowerCase();
+            const oldValue = el.textContent.replace("jours restants", "").trim();
 
-        const cards = document.querySelectorAll(".list-card");
+            const input = document.createElement("input");
+            input.className = "edit-input";
+            input.value = oldValue;
 
-        cards.forEach(card => {
+            const saveBtn = document.createElement("button");
+            saveBtn.textContent = "Save";
+            saveBtn.className = "btn-save";
 
-            const name = card.querySelector("h3")?.textContent.toLowerCase() || "";
-            const email = card.querySelector("p")?.textContent.toLowerCase() || "";
+            const cancelBtn = document.createElement("button");
+            cancelBtn.textContent = "Annuler";
+            cancelBtn.className = "btn-cancel";
 
-            if (name.includes(searchTerm) || email.includes(searchTerm)) {
-                card.style.display = "flex";
-            } else {
-                card.style.display = "none";
-            }
+            const div = document.createElement("div");
+            div.append(input, saveBtn, cancelBtn);
+
+            el.replaceWith(div);
+
+            saveBtn.addEventListener("click", async () => {
+
+                await updateAbonnement(id, {
+                    days: input.value
+                });
+
+                location.reload();
+            });
+
+            cancelBtn.addEventListener("click", () => {
+                location.reload();
+            });
         });
+    });
 
+    document.querySelectorAll(".btn-delete-abo").forEach(btn => {
+
+        btn.addEventListener("click", async () => {
+
+            const id = btn.dataset.id;
+
+            const confirmDelete = confirm("Voulez-vous vraiment supprimer cet abonnement ?");
+            if (!confirmDelete) return;
+
+            await deleteAbonnement(id);
+
+            location.reload();
+        });
     });
 };
 

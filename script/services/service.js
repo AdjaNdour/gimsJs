@@ -36,6 +36,28 @@ class Service {
         });
         return await res.json();
     }
+    
+    static async update(endpoint, id, data) {
+        try {
+            const res = await fetch(`${API_URL}/${endpoint}/${id}`, {
+                method: "PUT", // ou PATCH selon ton backend
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!res.ok) {
+                throw new Error(`Erreur HTTP: ${res.status}`);
+            }
+
+            return await res.json();
+
+        } catch (error) {
+            console.error("Erreur update API:", error);
+            return null;
+        }
+    }
 }
 
 export default Service;

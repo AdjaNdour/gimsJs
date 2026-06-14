@@ -20,6 +20,7 @@
 }
 
 .detail-coach-left{
+    width: 100%;
     display:flex;
     align-items:center;
     gap:15px;
@@ -193,7 +194,7 @@
     background-color: #ff6200;
     border-radius: 8px;
     padding: 10px;
-    color: #e5e5e5;
+    color: #ffffff;
     font-weight: bold;
 }
 .detail-title-row {
@@ -206,7 +207,56 @@
 .bgcp{
     padding:20px;
     margin:25px 0;
-    background:#fff;
+    background:#ffffff;
     border-radius: 10px;
     border:  1px solid rgb(231, 231, 231);
+}
+
+.edit-textarea {
+    width: 100%;
+    min-height: 250px;
+    max-height: 300px;
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.7;
+    border: 2px solid #ff7a28;
+    border-radius: 12px;
+    resize: vertical;
+    outline: none;
+    background: #fff;
+}
+.edit-input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 2px solid #ff6200;
+    border-radius: 12px;
+    outline: none;
+    font-family: inherit;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.edit-input:focus {
+    border-color: #ff6200;
+    box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.15);
+}
+
+.btn-save {
+    background: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
 }

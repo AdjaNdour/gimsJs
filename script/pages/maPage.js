@@ -1,97 +1,91 @@
 import Service from "../services/service.js";
 import AuthService from "../services/auth.services.js";
-const authService = new AuthService();
 
-const MaPage = async (id) => {
+let salleData = null;
+let salleId = null;
+
+const MaPage = async () => {
     const userConnect = AuthService.getUserConnect();
-
-    if (!userConnect) {
-        return `<p>Utilisateur non connecté</p>`;
-    }
+    if (!userConnect) return `<p>Utilisateur non connecté</p>`;
 
     const salles = await Service.getAll("salles");
-    const salle = salles.find(s=> String(s.coachId) ===String(userConnect.id));
-    const gallery = (salle.images || []).slice(1).map(image => `
-                                                <img src="${image}" alt="">
-                                                `).join("");
+    salleData = salles.find(s => String(s.coachId) === String(userConnect.id));
+
+    if (!salleData) return `<p>Aucune salle trouvée</p>`;
+
+    salleId = salleData.id;
+
+    const gallery = (salleData.images || []).slice(1).map(img => `
+        <img src="${img}" alt="">
+    `).join("");
 
     const users = await Service.getAll("users");
-    const coachs = users.filter(coach => coach.role === "coach");
-    const coach = coachs.find(coach => coach.id === salle.coachId);
+    const coach = users.find(u => String(u.id) === String(salleData.coachId));
 
     return `
-        <section class="detail-page  margin padd">
+        <section class="detail-page margin padd">
 
-            <h2 class="detail-coach-title">
-                Coaches Near You
-            </h2>
+            <h2 class="detail-coach-title">Coaches Near You</h2>
 
             <div class="detail-coach-card">
-
                 <div class="detail-coach-left">
-                    <img src="${coach.photo}" alt="Coach">
-
+                    <img src="${coach?.photo || ''}" />
                     <div class="detail-coach-info">
-                        <h4>${coach.nom}</h4>
-                        <p>${coach.description}</p>
+                        <h4>${coach?.nom || ''}</h4>
+                        <p>${coach?.description || ''}</p>
                     </div>
                 </div>
-
-                <div class="detail-coach-price">
-                    <span>$85/hr</span>
-                    <small>⭐ 5.0</small>
-                </div>
-
             </div>
 
-        
             <div class="detail-gym-info bgcp">
-
-                <div class="detail-title-row  ">
+                <div class="detail-title-row">
                     <h1 class="detail-gym-name">
-                        ${salle.nom} - ${salle.adresse}📍
+                        ${salleData.nom} - ${salleData.adresse}
                     </h1>
-
                     <button class="edit-btn" data-field="nom">Modifier</button>
-                </div>                         
+                </div>
 
                 <div class="detail-gym-price">
-                     ${salle.prix} FCFA / mois
+                    ${salleData.prix} FCFA / mois
                 </div>
 
-                <button class="detail-subscribe-btn" data-id="${salle.id}">
+                <button class="detail-subscribe-btn" data-id="${salleData.id}">
                     page d'abonnement
                 </button>
+            </div>
 
-            </div>
-            <div class="detail-coach-card">
-                <div class="detail-coach-left">
-                    <div class="detail-coach-info">
-                        <h2> Equipements</h2>
-                        <p> ${salle.equipements} </p>
-                    </div>
+            <div class="bgcp">
+                <div class="detail-title-row">
+                    <h2>Equipements</h2>
+                    <button class="edit-btn" data-field="equipements">Modifier</button>
                 </div>
+                <p class="equipements-text">
+                    ${(salleData.equipements || []).join(", ")}
+                </p>
             </div>
-        
+
             <div class="detail-description">
                 <div class="detail-title-row">
                     <h3>Description</h3>
                     <button class="edit-btn" data-field="description">Modifier</button>
                 </div>
-                <p>${salle.description}</p>
+                <p class="description-text">
+                    ${salleData.description}
+                </p>
             </div>
 
-            <div class="bgcp"> 
-                <div class="detail-title-row ">
+            <div class="bgcp">
+                <div class="detail-title-row">
                     <h2>Featured Gym</h2>
                     <button class="edit-btn" data-field="gallery">Modifier</button>
                 </div>
 
                 <div class="detail-gallery">
-                    <img src="${salle.images[0]}" alt="">
-                </div>    
-                <div class="detail-box-image"> 
-                        ${gallery} 
+                    <img src="${salleData.images?.[0] || ''}" />
+                </div>
+
+                <div class="detail-box-image">
+                    ${gallery}
                 </div>
             </div>
 
@@ -99,38 +93,105 @@ const MaPage = async (id) => {
     `;
 };
 
-MaPage.afterRender = () => {
 
-    const buttons = document.querySelectorAll(".edit-btn");
+async function updateSalle(partialData) {
+    const salles = await Service.getAll("salles");
+    const index = salles.findIndex(s => String(s.id) === String(salleId));
 
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
+    if (index === -1) return;
 
-            const field = btn.dataset.field;
+    const updated = {...salles[index],...partialData};
 
-            if (field === "nom") {
-                const newValue = prompt("Modifier le nom de la salle");
-                console.log("nouveau nom:", newValue);
-            }
+    await fetch(`http://localhost:3000/salles/${salleId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated)
+    });
 
-            if (field === "description") {
-                const newValue = prompt("Modifier la description");
-                console.log("nouvelle description:", newValue);
-            }
+    salles[index] = updated;
+}
 
-            if (field === "gallery") {
-                const newValue = prompt("Ajouter une image (URL)");
-                console.log("nouvelle image:", newValue);
-            }
+function modification({ selector, getValue, save }) {
 
+    const el = document.querySelector(selector);
+
+    el.addEventListener("click", () => {
+
+        const target = getValue();
+        const oldValue = target.textContent;
+
+        const div = document.createElement("div");
+
+        const input = document.createElement(target.tagName === "P" ? "textarea" : "input");
+        input.value = oldValue;
+        input.className = target.tagName === "P" ? "edit-textarea" : "edit-input";
+
+        const saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save";
+        saveBtn.className = "btn-save";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Annuler";
+        cancelBtn.className = "btn-cancel";
+
+        div.appendChild(input);
+        div.appendChild(saveBtn);
+        div.appendChild(cancelBtn);
+
+        target.replaceWith(div);
+        input.focus();
+
+        saveBtn.addEventListener("click", async () => {
+            await save(input.value);
+            location.reload(); 
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            location.reload();
         });
     });
+}
 
-    let subscribe = document.querySelector(".detail-subscribe-btn");
-    subscribe.addEventListener("click", () => {
-        const id = subscribe.dataset.id;
-        location.hash = `subscription/${id}`;
+MaPage.afterRender = () => {
+
+    if (!salleData) return;
+
+    modification({
+        selector: "[data-field='nom']",
+        getValue: () => document.querySelector(".detail-gym-name"),
+        save: (value) => updateSalle({ nom: value })
     });
 
+    modification({
+        selector: "[data-field='description']",
+        getValue: () => document.querySelector(".description-text"),
+        save: (value) => updateSalle({ description: value })
+    });
+
+    modification({
+        selector: "[data-field='equipements']",
+        getValue: () => document.querySelector(".equipements-text"),
+        save: (value) =>
+            updateSalle({
+                equipements: value.split(",").map(e => e.trim())
+            })
+    });
+
+    document.querySelector("[data-field='gallery']").addEventListener("click", async () => {
+        const url = prompt("URL image ?");
+        if (!url) return;
+
+        await updateSalle({
+            images: [...(salleData.images || []), url]
+        });
+
+        location.reload();
+    });
+
+    // SUBSCRIBE
+    document.querySelector(".detail-subscribe-btn").addEventListener("click", (e) => {
+        location.hash = `subscription/${e.target.dataset.id}`;
+    });
 };
+
 export default MaPage;
