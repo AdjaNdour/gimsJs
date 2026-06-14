@@ -49,6 +49,7 @@
     {
       "id": "1",
       "nom": "Zenith Wellness",
+      "types" : ["Pilates","boxing"],
       "adresse": "Dakar",
       "prix": 10000,
       "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",
@@ -78,6 +79,7 @@
     {
       "id": "2",
       "nom": "Abdolisation hihi Fit",
+      "types" : ["yoga"],
       "adresse": "Dakar",
       "prix": 12000,
       "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",
@@ -103,6 +105,7 @@
     {
       "id": "3",
       "nom": "Fitness Fit",
+      "types" : ["hitt"],
       "adresse": "Dakar",
       "prix": 8000,
       "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-774799479",

@@ -1,0 +1,130 @@
+.monabo-page{
+    padding:20px;
+}
+
+.monabo-card{
+    background:#f4ece8;
+    border-radius:20px;
+    padding:25px;
+}
+
+.monabo-header h2{
+    font-size:38px;
+    margin-bottom:5px;
+}
+
+.monabo-header p{
+    color:#888;
+    margin-bottom:25px;
+}
+
+.monabo-calendar{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
+}
+
+.monabo-day h4{
+    text-align:center;
+    color:#ff6200;
+    margin-bottom:15px;
+    font-weight:700;
+}
+
+.monabo-session{
+    background:white;
+    padding:12px;
+    border-radius:8px;
+    border-left:3px solid #ff6200;
+    min-height:80px;
+}
+
+.monabo-session.active{
+    border:1px solid #888;
+}
+
+.monabo-session span{
+    font-size:12px;
+    font-weight:700;
+}
+
+.monabo-session h3{
+    font-size:16px;
+    margin:8px 0;
+    font-weight:500;
+}
+
+.monabo-session small{
+    color:#32c232;
+}
+
+.monabo-payment{
+    margin-top:60px;
+}
+
+.monabo-payment h2{
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.monabo-price{
+    color:#ff6200;
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.monabo-payment p{
+    color:#c0c0c0;
+}
+
+.monabo-btn{
+    width:100%;
+    margin-top:25px;
+    border:none;
+    background:#ff7520;
+    color:white;
+    padding:10px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    display: flex;
+    justify-content: center;
+}
+
+.monabo-btn:hover{
+    opacity:.9;
+}
+
+@media(max-width:1000px){
+
+    .monabo-calendar{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .monabo-payment h2{
+        font-size:28px;
+    }
+}
+
+@media(max-width:600px){
+
+    .monabo-calendar{
+        grid-template-columns:1fr;
+    }
+
+    .monabo-header h2{
+        font-size:28px;
+    }
+
+    .monabo-payment h2{
+        font-size:22px;
+    }
+
+    .monabo-price{
+        font-size:22px;
+    }
+}

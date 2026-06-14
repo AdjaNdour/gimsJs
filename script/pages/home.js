@@ -3,9 +3,8 @@ import Service from "../services/service.js";
 const Home = async () => {
 
     const salles = await Service.getAll("salles");
-
     const sallesHTML = salles.map(salle => `
-        <article class="home-gym-card" data-id="${salle.id}">
+        <article class="home-gym-card" data-id="${salle.id}"  data-types='${JSON.stringify(salle.types)}'>
             <div class="home-card-content">
 
                 <div class="home-left">
@@ -52,7 +51,6 @@ const Home = async () => {
 
             <div class="home-section-title">
                 <h2>Featured Gym</h2>
-                <a href="#">See all</a>
             </div>
 
             ${sallesHTML}
@@ -63,6 +61,10 @@ const Home = async () => {
 
 Home.afterRender = () => {
 
+    const input = document.querySelector("#search");
+    const cards = document.querySelectorAll(".home-gym-card");
+    const bouton = document.querySelectorAll(".home-filters button");
+
     let salles = document.querySelectorAll(".home-gym-card");
     salles.forEach(card => {
         card.addEventListener("click", () => {
@@ -70,9 +72,6 @@ Home.afterRender = () => {
             location.hash = `detailsSalle/${id}`;
         });
     });
-
-    const input = document.querySelector("#search");
-    const cards = document.querySelectorAll(".home-gym-card");
 
     if (!input) return;
 
@@ -86,11 +85,7 @@ Home.afterRender = () => {
             const price = card.querySelector("span")?.textContent.toLowerCase() || "";
             const description = card.querySelector(".home-right p")?.textContent.toLowerCase() || "";
 
-            if (
-                title.includes(searchTerm) ||
-                price.includes(searchTerm) ||
-                description.includes(searchTerm)
-            ) {
+            if (title.includes(searchTerm) || price.includes(searchTerm) || description.includes(searchTerm)) {
                 card.style.display = "flex";
             } else {
                 card.style.display = "none";
@@ -98,6 +93,22 @@ Home.afterRender = () => {
         });
 
     });
+
+    bouton.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const filtre = btn.textContent.trim().toLowerCase();
+            cards.forEach(card => {
+                const types = JSON.parse(card.dataset.types || "[]").map(t => t.toLowerCase());
+                if (filtre.includes("near me") || types.includes(filtre)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+
+    });
+
 
 };
 
