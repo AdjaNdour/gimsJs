@@ -17,39 +17,45 @@ const MesClients = async () => {
 
     if (!salle) return `<p>Aucune salle trouvée</p>`;
 
-    const mesAbos = abonnements.filter(a => String(a.salleId) === String(salle.id));
+    const mesAbos = abonnements.filter(abo => String(abo.salleId) === String(salle.id));
 
     const mesClients = mesAbos.map(abo => {
         const client = users.find(u => String(u.id) === String(abo.clientId));
         return { ...abo, client };
     });
 
-    const html = mesClients.map(a => {
+    const html = mesClients.map(abo => {
 
-        if (!a.client) return "";
+        if (!abo.client) return "";
 
         return `
             <article class="list-card">
 
                 <div class="list-left">
-                    <img src="${a.client.photo || ""}">
+                    <img src="${abo.client.photo || ""}">
                     <div class="list-info">
-                        <h3>${a.client.nom}</h3>
-                        <p>${a.client.email}</p>
+                        <h3>${abo.client.nom}</h3>
+                        <p>${abo.client.email}</p>
                     </div>
                 </div>
 
                 <div class="list-right">
 
-                    <span class="list-days" data-id="${a.id}">
-                        ${a.days || 15} jours restants
+                    <span class="list-debut">
+                        ${abo.dateDebut || ""}
+                    </span>
+                    <span class="list-fin">
+                        ${abo.dateFin || ""} 
+                    </span>
+                    <span class="list-days" data-id="${abo.id}">
+                        ${abo.days || ""} jours restants
                     </span>
 
-                    <button class="btn-edit-abo" data-id="${a.id}">
+                    <button class="btn-edit-abo" data-id="${abo.id}">
                         Modifier abo
                     </button>
 
-                    <button class="btn-delete-abo" data-id="${a.id}">
+                    <button class="btn-delete-abo" data-id="${abo.id}">
                         Abandon
                     </button>
 
@@ -62,7 +68,12 @@ const MesClients = async () => {
     return `
         <section class="page active margin padd">
 
-            <h2>Mes Clients</h2>
+            <div class="home-search-box"> 
+                <i class="fa-solid fa-magnifying-glass"></i> 
+                <input type="text" id="search" placeholder="Search names, email..."> 
+            </div>
+
+            <h2 class="client-title" > Mes Clients </h2>
 
             <div class="list-container">
                 ${mesClients.length ? html : "<p>Aucun client</p>"}
@@ -150,6 +161,22 @@ MesClients.afterRender = () => {
             await deleteAbonnement(id);
 
             location.reload();
+        });
+    });
+
+    const input = document.querySelector("#search");
+    if (!input) return;
+    input.addEventListener("input", () => {
+        const searchTerm = input.value.toLowerCase();
+        const cards = document.querySelectorAll(".list-card");
+        cards.forEach(card => {
+            const name = card.querySelector("h3")?.textContent.toLowerCase() || "";
+            const email = card.querySelector("p")?.textContent.toLowerCase() || "";
+            if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
         });
     });
 };

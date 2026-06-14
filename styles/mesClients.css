@@ -127,3 +127,33 @@
     }
 
 }
+
+.list-debut{
+    color: #ff7700;
+    font-weight: bold;
+}
+.list-fin{
+    color: #3b96ff;
+    font-weight: bold;
+
+}
+.client-title{
+    margin-bottom: 40px;
+}
+
+.btn-delete-abo,
+.btn-edit-abo{
+    background: #1a0155;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.btn-delete-abo{
+        background: #ff6200;
+
+}
