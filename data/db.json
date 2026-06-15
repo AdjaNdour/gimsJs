@@ -44,6 +44,14 @@
       "password": "kili",
       "role": "coach",
       "description": "coach en Fitness depuis 3 ans"
+    },
+    {
+      "nom": "mimi",
+      "photo": "https://i.pinimg.com/1200x/49/0b/61/490b61c0d93920841527e4d4f7aee5fa.jpg",
+      "email": "mimi@gmail.com",
+      "password": "mimi",
+      "role": "client",
+      "id": "xbOZNPrj4_M"
     }
   ],
   "salles": [
@@ -110,7 +118,6 @@
         "https://i.pinimg.com/736x/48/96/c2/4896c29a479322f05bf34cb69393ba4a.jpg"
       ],
       "createdAt": "2026/01/03"
-
     },
     {
       "id": "3",

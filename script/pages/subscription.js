@@ -58,7 +58,7 @@ const Subscription = async (salleId) => {
 
 Subscription.afterRender = () => {
 
-    const baseUrl = "http://172.20.10.6:5500";
+    const baseUrl = "http://192.168.54.66:5500";
 
     const hash = window.location.hash.replace("#", "");
     const parts = hash.split("/");

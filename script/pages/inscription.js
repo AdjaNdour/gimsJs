@@ -118,13 +118,6 @@ Inscription.afterRender = () => {
 
         let hasError = false;
 
-        if (photo === "") {
-            inputPhoto.parentElement.classList.add("error");
-            document.getElementById("photoError").textContent =
-                "L'url photo est obligatoire";
-            hasError = true;
-        }
-
         if (nom === "") {
             inputNom.parentElement.classList.add("error");
             document.getElementById("nomError").textContent =

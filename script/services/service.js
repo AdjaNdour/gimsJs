@@ -36,25 +36,22 @@ class Service {
         });
         return await res.json();
     }
-    
-    static async update(endpoint, id, data) {
+
+    static async update(endpoint, id, partialData) {
         try {
             const res = await fetch(`${API_URL}/${endpoint}/${id}`, {
-                method: "PUT", // ou PATCH selon ton backend
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(partialData)
             });
 
-            if (!res.ok) {
-                throw new Error(`Erreur HTTP: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(res.status);
 
             return await res.json();
-
-        } catch (error) {
-            console.error("Erreur update API:", error);
+        } catch (e) {
+            console.error("Update error:", e);
             return null;
         }
     }

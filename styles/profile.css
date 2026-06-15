@@ -64,8 +64,8 @@
 }
 
 .profile-stat h3 {
-    font-size: 14px;
-    color: #777;
+    font-size: 18px;
+    color: #ff6b21;
 }
 
 .profile-stat p {
@@ -73,12 +73,32 @@
     margin-top: 5px;
 }
 
-.profile-gallery-section h3 {
+.profile-gallery-section h2 {
     margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+.profile-gallery-section .myblock {
+    margin-bottom: 10px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr ;
+    height: 200px;
 }
 
-.profile-gallery img {
-    width: 33%;
+.donne {
+    width: 99%;
     border-radius: 10px;
     object-fit: cover;
+    background-color: #ffffff;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.donne h3{
+ color: #ff6b21;
+ font-size: 18px;
 }

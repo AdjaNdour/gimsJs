@@ -100,7 +100,7 @@ async function updateSalle(partialData) {
 
     if (index === -1) return;
 
-    const updated = {...salles[index],...partialData};
+    const updated = { ...salles[index], ...partialData };
 
     await fetch(`http://localhost:3000/salles/${salleId}`, {
         method: "PUT",
@@ -143,7 +143,7 @@ function modification({ selector, getValue, save }) {
 
         saveBtn.addEventListener("click", async () => {
             await save(input.value);
-            location.reload(); 
+            location.reload();
         });
 
         cancelBtn.addEventListener("click", () => {
@@ -171,10 +171,7 @@ MaPage.afterRender = () => {
     modification({
         selector: "[data-field='equipements']",
         getValue: () => document.querySelector(".equipements-text"),
-        save: (value) =>
-            updateSalle({
-                equipements: value.split(",").map(e => e.trim())
-            })
+        save: (value) => updateSalle({ equipements: value.split(",").map(e => e.trim())})
     });
 
     document.querySelector("[data-field='gallery']").addEventListener("click", async () => {
@@ -188,7 +185,6 @@ MaPage.afterRender = () => {
         location.reload();
     });
 
-    // SUBSCRIBE
     document.querySelector(".detail-subscribe-btn").addEventListener("click", (e) => {
         location.hash = `subscription/${e.target.dataset.id}`;
     });
