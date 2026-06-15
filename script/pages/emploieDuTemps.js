@@ -73,6 +73,16 @@ const EmploieDuTemps = async () => {
 
             </div>
 
+            <div class="detail-t1">
+                Il vous reste 15 jours avant le prochain paiement 
+            </div>
+            <div class="detail-t2">
+                10000 FCFA / mois 
+            </div>
+            <div class="detail-t3">
+                En cas d'abandon nous ne rembourseront pas le paiement
+            </div>
+
         </section>
     `;
 };

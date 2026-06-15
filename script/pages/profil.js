@@ -1,9 +1,15 @@
 import AuthService from "../services/auth.services.js";
+import Service from "../services/service.js";
 
+const Profile = async () => {
 
-const Profile = () => {
-
-    const user = AuthService.getUserConnect();
+    const userConnect = AuthService.getUserConnect();
+    if (!userConnect) return `<p>Utilisateur non connecté</p>`;
+    const salles = await Service.getAll("salles");
+    const salleData = salles.find(s => String(s.coachId) === String(userConnect.id));
+    if (!salleData) return `<p>Aucune salle trouvée</p>`;
+    const abonnements = await Service.getAll("abonnements");
+    const tousMesABos = abonnements.filter(abo => abo.salleId === salleData.coachId) ;
 
     return `
     <section id="profile" class="page margin padd">
@@ -14,14 +20,14 @@ const Profile = () => {
             <div class="profile-header">
 
                 <img 
-                    src="${user?.photo || 'https://via.placeholder.com/150'}" 
+                    src="${userConnect?.photo || 'https://via.placeholder.com/150'}" 
                     alt="profile"
                 >
 
                 <div class="profile-info">
 
-                    <h2>${user?.nom || "Utilisateur"}</h2>
-                    <p>${user?.email || ""}</p>
+                    <h2>${userConnect?.nom || "Utilisateur"}</h2>
+                    <p>${userConnect?.email || ""}</p>
 
                     <button class="profile-edit-btn">
                         Modifier le profil
@@ -36,17 +42,17 @@ const Profile = () => {
 
                 <div class="profile-stat">
                     <h3>Abonnement</h3>
-                    <p>${user?.abonnement || "Basic"}</p>
+                    <p>${tousMesABos.lenght || ""}</p>
                 </div>
 
                 <div class="profile-stat">
-                    <h3>Objectif</h3>
-                    <p>${user?.objectif || "Fitness"}</p>
+                    <h3>my types </h3>
+                    <p>${salleData?.types || ""}</p>
                 </div>
 
                 <div class="profile-stat">
                     <h3>Membre depuis</h3>
-                    <p>${user?.createdAt || "2026"}</p>
+                    <p>${salleData?.createdAt || ""}</p>
                 </div>
 
             </div>

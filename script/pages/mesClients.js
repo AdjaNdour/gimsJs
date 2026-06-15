@@ -73,7 +73,7 @@ const MesClients = async () => {
                 <input type="text" id="search" placeholder="Search names, email..."> 
             </div>
 
-            <h2 class="client-title" > Mes Clients </h2>
+            <h2 class="client-title"> Mes Clients </h2>
 
             <div class="list-container">
                 ${mesClients.length ? html : "<p>Aucun client</p>"}

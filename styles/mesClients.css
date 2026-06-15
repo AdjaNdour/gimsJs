@@ -70,7 +70,6 @@
 
 .list-days{
     color:#16c60c;
-    font-weight:700;
 }
 
 .list-edit-btn{
@@ -130,12 +129,9 @@
 
 .list-debut{
     color: #ff7700;
-    font-weight: bold;
 }
 .list-fin{
     color: #3b96ff;
-    font-weight: bold;
-
 }
 .client-title{
     margin-bottom: 40px;
@@ -154,6 +150,5 @@
 }
 
 .btn-delete-abo{
-        background: #ff6200;
-
+    background: #ff6200;
 }

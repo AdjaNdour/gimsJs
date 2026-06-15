@@ -3,6 +3,7 @@ import Service from "../services/service.js";
 const Home = async () => {
 
     const salles = await Service.getAll("salles");
+    
     const sallesHTML = salles.map(salle => `
         <article class="home-gym-card" data-id="${salle.id}"  data-types='${JSON.stringify(salle.types)}'>
             <div class="home-card-content">

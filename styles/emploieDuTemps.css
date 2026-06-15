@@ -1,5 +1,6 @@
 .monabo-page{
     padding:20px;
+    margin-top: 50px;
 }
 
 .monabo-card{
@@ -127,4 +128,21 @@
     .monabo-price{
         font-size:22px;
     }
+}
+
+.detail-t1{
+    font-size: 30px ;
+    margin-top:70px;
+    font-weight: bold;
+}
+.detail-t2{
+    font-size: 18px ;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ff6200;
+}
+.detail-t3{
+    font-size: 15px ;
+    margin-top: 10px;
+    color: #888;
 }

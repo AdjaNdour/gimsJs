@@ -12,12 +12,10 @@
     padding: 20px;
 }
 
-/* TITRE NAV */
 .sidebar h2 {
     margin-bottom: 30px;
 }
 
-/* MENU */
 .sidebar nav {
     display: flex;
     flex-direction: column;
@@ -61,11 +59,14 @@
 
 .userConnect h3 {
     font-size: 14px;
+    margin-top: -1px;
 }
 
 .userConnect p {
     font-size: 12px;
     color: #ccc;
+    margin-top: -8px;
+    margin-left: 4px;
 }
 
 .sidebar button.logout {
@@ -78,4 +79,10 @@
     padding: 12px;
     width: 100%;
     font-weight: bold;
+}
+.sb{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
 }

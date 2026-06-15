@@ -95,10 +95,7 @@ Login.afterRender = () => {
 
         if (hasError) return;
 
-        let userConnect = await authService.connexion(
-            email,
-            password
-        );
+        let userConnect = await authService.connexion( email,password);
 
         if (userConnect) {
             console.table(userConnect);
