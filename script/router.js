@@ -15,12 +15,9 @@ const routes = {
 
 const handleHashChange = async () => {
     const fullPath = window.location.hash.replace('#', '') || '/';
-
     const parts = fullPath.split('/').filter(Boolean);
-
     const basePath = '/' + (parts[0] || '');
     const param = parts[1] || null;
-
     await render(basePath, param);
 };
 
@@ -37,7 +34,6 @@ const render = async (path, param = null) => {
     console.log(pageName);
 
     if (sidebar) {
-
         if (path === "/" || path === "/connexion" || path === "/inscription") {
             sidebar.innerHTML = "";
             sidebar.style.display = "none";

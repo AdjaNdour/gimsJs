@@ -102,3 +102,13 @@
  color: #ff6b21;
  font-size: 18px;
 }
+
+.profile-btn-modif{
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #ff6b21;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

@@ -7,7 +7,8 @@ const Profile = async () => {
     if (!userConnect) return `<p>Utilisateur non connecté</p>`;
 
     const salles = await Service.getAll("salles");
-    const salleData = salles.find(s => String(s.coachId) === String(userConnect.id));
+    const salleData = salles.find(s => String(s
+        .coachId) === String(userConnect.id));
 
     if (!salleData) return `<p>Aucune salle trouvée</p>`;
 
@@ -23,13 +24,6 @@ const Profile = async () => {
                     id="profileImage"
                     src="${userConnect?.photo || 'https://via.placeholder.com/150'}"
                     alt="profile"
-                >
-
-                <input
-                    type="file"
-                    id="photoInput"
-                    accept="image/*"
-                    style="display:none"
                 >
 
                 <div class="profile-info">
@@ -73,13 +67,25 @@ const Profile = async () => {
                 <div class="myblock">
 
                     <div class="donne">
+                    
                         <h3>Nom</h3>
-                        <p>${userConnect.nom || ""}</p>
+                        <p class="pnom" >${userConnect.nom || ""}</p>
+                       <div class="nom">
+                            <button class="profile-btn-modif">
+                                Modifier
+                            </button>
+                       </div>
+
                     </div>
 
                     <div class="donne">
                         <h3>Email</h3>
-                        <p>${userConnect.email || ""}</p>
+                        <p class="pemail" >${userConnect.email || ""}</p>
+                        <div class="email">
+                            <button class="profile-btn-modif">
+                                Modifier
+                            </button>
+                        </div>
                     </div>
 
                     <div class="donne">
@@ -89,7 +95,22 @@ const Profile = async () => {
 
                     <div class="donne">
                         <h3>Description</h3>
-                        <p>${userConnect.description || ""}</p>
+                        <p class="pdescription" >${userConnect.description || ""}</p>
+                        <div class="description">
+                            <button class="profile-btn-modif">
+                                Modifier
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="donne">
+                        <h3>password</h3>
+                        <p class="ppassword" >${userConnect.password || ""}</p>
+                        <div class="password">
+                            <button class="profile-btn-modif">
+                                Modifier
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -105,38 +126,96 @@ const Profile = async () => {
 Profile.afterRender = () => {
 
     const btn = document.querySelector(".profile-edit-btn");
-    const input = document.querySelector("#photoInput");
+    const btns = document.querySelectorAll(".profile-btn-modif");
 
-    if (!btn || !input) return;
+    if (!btn) return;
 
-    btn.addEventListener("click", () => {
-        input.click();
+    btn.addEventListener("click", async () => {
+        const laphoto = prompt("enter un lien");
+        if (!laphoto) return;
+        const user = AuthService.getUserConnect();
+        const updatedUser = await Service.update("users", user.id, {
+            photo: laphoto
+        });
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        document.querySelector("#profileImage").src = laphoto;
+        location.reload();
     });
 
-    input.addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    function blabla(element, cle) {
+        let champ = document.querySelector(element);
+        let ancienneValeur = champ.textContent;
 
-        const reader = new FileReader();
+        champ.textContent = "";
 
-        reader.onload = async () => {
-            const photoBase64 = reader.result;
-            const user = AuthService.getUserConnect();
+        let input = document.createElement("input");
+        input.type = "text";
+        input.value = ancienneValeur;
 
-            if (!user) return;
+        champ.appendChild(input);
 
-            const updatedUser = await Service.update("users", user.id, {
-                photo: photoBase64.substring(0, 100)
-            });
+        input.addEventListener("keydown", async (e) => {
+            if (e.key === "Enter") {
+                const user = AuthService.getUserConnect();
 
-            if (!updatedUser) return;
+                const updatedUser = await Service.update("users", user.id, {
+                    [cle]: input.value
+                });
 
-            localStorage.setItem("user", JSON.stringify(updatedUser));
-            document.querySelector("#profileImage").src = photoBase64;
-        };
+                if (!updatedUser) return;
 
-        reader.readAsDataURL(file);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                location.reload();
+            }
+        });
+    }
+    btns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            let conteneur = btn.parentElement.className;
+
+            if (conteneur === "nom") {
+                blabla(".pnom", "nom");
+            }
+
+            if (conteneur === "email") {
+                blabla(".pemail", "email");
+            }
+
+            if (conteneur === "description") {
+                blabla(".pdescription", "description");
+            }
+
+            if (conteneur === "password") {
+                blabla(".ppassword", "password");
+            }
+        });
     });
 };
 
 export default Profile;
+
+
+// input.addEventListener("change", async (e) => {
+//     const file = e.target.files[0];
+//     if (!file) return;
+
+//     const reader = new FileReader();
+
+//     reader.onload = async () => {
+//         const photoBase64 = reader.result;
+//         const user = AuthService.getUserConnect();
+
+//         if (!user) return;
+
+//         const updatedUser = await Service.update("users", user.id, {
+//             photo: photoBase64.substring(0, 100)
+//         });
+
+//         if (!updatedUser) return;
+
+//         localStorage.setItem("user", JSON.stringify(updatedUser));
+//         document.querySelector("#profileImage").src = photoBase64;
+//     };
+
+//     reader.readAsDataURL(file);
+// });
