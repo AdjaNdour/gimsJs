@@ -19,9 +19,7 @@ if (!nom) {
     process.exit();
 }
 
-const chemin = "/home/adja/Documents/Aly JS/Projet Gym/script/pages";
-
-const CIBLE = path.join(chemin, `/${nom}`);
+const CIBLE = "/home/adja/Documents/Aly JS/Projet Gym/script/pages";
 
 const cheminFichier = path.join(CIBLE, `${nom}.js`);
 

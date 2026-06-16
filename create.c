@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   // création fichier JS
   // -------------------------
   snprintf(fichier, sizeof(fichier),
-           "%s/%s.js",
+           "/%s.js",
            dossier, nom);
 
   FILE *fp = fopen(fichier, "w");
