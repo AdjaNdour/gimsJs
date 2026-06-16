@@ -40,16 +40,7 @@ fs.writeFileSync(cheminFichier, contenu);
 
 console.log(`${nom}.js créé dans ${CIBLE}`);
 
-
-
-
-
-
-
-
-
-
-
+//----------------------------------------------------------------------------------------------
 
 const ROUTES = "/home/adja/Documents/Aly JS/Projet Gym/script/router.js";
 
