@@ -41,6 +41,16 @@ fs.writeFileSync(cheminFichier, contenu);
 console.log(`${nom}.js créé dans ${CIBLE}`);
 
 
+
+
+
+
+
+
+
+
+
+
 const ROUTES = "/home/adja/Documents/Aly JS/Projet Gym/script/router.js";
 
 if (!fs.existsSync(ROUTES)) {
@@ -50,14 +60,16 @@ if (!fs.existsSync(ROUTES)) {
 
 let router = fs.readFileSync(ROUTES, "utf-8");
 
+// éviter doublon
 if (router.includes(`"/${nom}"`)) {
-    console.log(`La route /${nom} existe déjà dans router.js`);
+    console.log(`La route /${nom} existe déjà`);
     process.exit(0);
 }
 
-
+// nouvelle route
 const newRoute = `    ,"/${nom}": "${nom}"\n`;
 
+// 🔥 trouver le PREMIER "};"
 const index = router.indexOf("};");
 
 if (index === -1) {
@@ -65,11 +77,13 @@ if (index === -1) {
     process.exit(1);
 }
 
-const updatedRouter =
-    router.slice(0, index) +
-    newRoute +
-    "};";
+// ✔️ INSÉRER sans supprimer le reste
+const before = router.substring(0, index);
+const after = router.substring(index);
 
+const updatedRouter = before + newRoute + after;
+
+// écrire fichier
 fs.writeFileSync(ROUTES, updatedRouter);
 
 console.log(`Route ajoutée : /${nom}`);

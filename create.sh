@@ -9,6 +9,7 @@ if [ -z "$nom" ]; then
     exit 1
 fi
 
+
 # Dossier contenant les pages
 chemin="/home/adja/Documents/Aly JS/Projet Gym/script/pages"
 
