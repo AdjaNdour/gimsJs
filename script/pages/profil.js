@@ -5,12 +5,13 @@ const Profile = async () => {
 
     const userConnect = AuthService.getUserConnect();
     if (!userConnect) return `<p>Utilisateur non connecté</p>`;
-
     const salles = await Service.getAll("salles");
-    const salleData = salles.find(s => String(s
-        .coachId) === String(userConnect.id));
 
-    if (!salleData) return `<p>Aucune salle trouvée</p>`;
+    let salleData = null;
+
+    if (userConnect.role === "coach") {
+        salleData = salles.find(s => String(s.coachId) === String(userConnect.id));
+    }
 
     return `
     <section id="profile" class="page margin padd">
@@ -49,13 +50,10 @@ const Profile = async () => {
 
                 <div class="profile-stat">
                     <h3>Types de salle</h3>
-                    <p>${salleData?.types?.join(", ") || ""}</p>
+                    <p>${salleData?.types?.join(", ") || "N/A"}</p>
                 </div>
 
-                <div class="profile-stat">
-                    <h3>Membre depuis</h3>
-                    <p>${salleData?.createdAt || "N/A"}</p>
-                </div>
+               
 
             </div>
 

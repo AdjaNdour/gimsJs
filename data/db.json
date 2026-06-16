@@ -16,7 +16,7 @@
       "email": "ndour@gmail.com",
       "password": "ndour",
       "role": "client",
-      "description": ""
+      "description": "client"
     },
     {
       "id": "3",
@@ -25,7 +25,7 @@
       "email": "lola@gmail.com",
       "password": "lola",
       "role": "client",
-      "description": ""
+      "description": "client"
     },
     {
       "id": "4",
@@ -34,7 +34,7 @@
       "email": "lili@gmail.com",
       "password": "lili",
       "role": "client",
-      "description": ""
+      "description": "client"
     },
     {
       "id": "5",
