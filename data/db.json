@@ -2,17 +2,17 @@
   "users": [
     {
       "id": "1",
-      "photo": "https://i.pinimg.com/1200x/8d/9f/42/8d9f4279d57c64c720036efb10bf32df.jpg",
-      "nom": "youssou",
+      "photo": "https://i.pinimg.com/736x/ff/8c/29/ff8c2911f682409fb324e3e33f6f7bc6.jpg",
+      "nom": "kiki",
       "email": "kiki@gmail.com",
       "password": "kiki",
       "role": "coach",
-      "description": "coach en Fitness depuis 3 ans"
+      "description": "coach en fitness depuis 3 ans "
     },
     {
       "id": "2",
       "photo": "https://i.pinimg.com/webp/736x/ff/03/89/ff038912623450a2778d5cea3704e2c0.webp",
-      "nom": "youssou",
+      "nom": "adja",
       "email": "ndour@gmail.com",
       "password": "ndour",
       "role": "client",
@@ -73,8 +73,7 @@
         "Haltères",
         "Tapis",
         "Vélos",
-        "Haltères",
-        "kiki"
+        "Haltères"
       ],
       "coachId": "1",
       "images": [
@@ -86,7 +85,9 @@
         "https://i.pinimg.com/1200x/40/e6/c5/40e6c5f5681473f4914d7a5b98245cdd.jpg",
         "https://i.pinimg.com/736x/48/96/c2/4896c29a479322f05bf34cb69393ba4a.jpg",
         "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg",
-        "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg"
+        "https://i.pinimg.com/1200x/6f/f3/1f/6ff31f3405841601b8046f920cd50e77.jpg",
+        "https://i.pinimg.com/736x/ff/8c/29/ff8c2911f682409fb324e3e33f6f7bc6.jpg",
+        "https://i.pinimg.com/736x/ff/8c/29/ff8c2911f682409fb324e3e33f6f7bc6.jpg"
       ],
       "createdAt": "2026/01/03"
     },
