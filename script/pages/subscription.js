@@ -1,12 +1,12 @@
 import Service from "../services/service.js";
+import AuthService from "../services/auth.services.js";
+const hash = window.location.hash.replace("#", "");
+const parts = hash.split("/");
+const salleId = parts[1];
 
-const Subscription = async (salleId) => {
+const Subscription = async () => {
 
-    const salle = Service.get("salles", salleId);
-
-    const qrWave = `scan.html?type=wave&salleId=${salleId}`;
-    const qrOrange = `scan.html?type=orange&salleId=${salleId}`;
-
+    const salle = await Service.getById("salles", salleId);
     return `
      <section class="abonnement-page margin padd">
 
@@ -40,9 +40,9 @@ const Subscription = async (salleId) => {
         </div>
 
         <div class="abonnement-salle">
-            <h2>Zenith Wellness</h2>
+            <h2>${salle.nom}</h2>
             <div class="abonnement-prix">
-                📍 10000 f / mois
+                📍 ${salle.prix} FCFA / mois
             </div>
         </div>
 
@@ -60,10 +60,6 @@ Subscription.afterRender = () => {
 
     const baseUrl = "http://192.168.54.66:5500";
 
-    const hash = window.location.hash.replace("#", "");
-    const parts = hash.split("/");
-
-    const salleId = parts[1];
 
     console.log("HASH =", hash);
     console.log("Salle ID =", salleId);
@@ -97,7 +93,30 @@ Subscription.afterRender = () => {
     const inputAdresse = document.getElementById("adresse");
     const inputObjectif = document.getElementById("objectif");
 
-    form.addEventListener("submit", (e) => {
+    async function saveAbonnement(add, obj) {
+        const userConnect = AuthService.getUserConnect();
+        const salle = await Service.get("salles", salleId);
+        const dateDebut = new Date();
+
+        const jour = dateDebut.getDate();
+        const mois = dateDebut.getMonth()+ 1;
+        const annee = dateDebut.getFullYear();
+
+        const abo = {
+            clientId: userConnect.id,
+            salleId: salleId,
+            dateDebut: `${annee}-${mois}-${jour}`,
+            dateFin: `${annee}-${mois+1}-${jour}`,
+            days: 30,
+            montant: salle.prix,
+            statut: "actif",
+            adresse: add,
+            objectif: obj
+        };
+        await Service.add("abonnements", abo);
+    }
+
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const adresse = inputAdresse.value.trim();
@@ -108,6 +127,8 @@ Subscription.afterRender = () => {
             if (objectif === "") inputObjectif.style.border = "2px solid red";
             return;
         }
+        await saveAbonnement(adresse, objectif);
+        alert("Abonnement enregistré !");
 
         inputAdresse.style.border = "1px solid #ddd";
         inputObjectif.style.border = "1px solid #ddd";

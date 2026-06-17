@@ -8,40 +8,26 @@ if [ -z "$nom" ]; then
     echo "Veuillez fournir un nom"
     exit 1
 fi
-
-
 # Dossier contenant les pages
 chemin="/home/adja/Documents/Aly JS/Projet Gym/script/pages"
-
 # Dossier de la nouvelle page
 CIBLE="$chemin/$nom"
-
 # Fichier JS à créer
 cheminFichier="$CIBLE/$nom.js"
-
 # Création du dossier
 mkdir -p "$CIBLE"
-
 # Création du fichier de la page
 cat > "$cheminFichier" << EOF
 import { navigate } from '../router.js';
 
-const $nom = async () => {
+const $nom = async () => {}
 
-}
-
-$nom.afterRender = () => {
-
-}
+$nom.afterRender = () => {}
 
 export default $nom
 EOF
-
 echo "$nom.js créé dans $CIBLE"
 
-# -----------------------------
-# Mise à jour du fichier routes.js
-# -----------------------------
 
 ROUTES="/home/adja/Documents/Aly JS/Projet Gym/script/router.js"
 

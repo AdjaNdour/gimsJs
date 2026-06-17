@@ -25,7 +25,7 @@
       "email": "lola@gmail.com",
       "password": "lola",
       "role": "client",
-      "description": "client"
+      "description": ""
     },
     {
       "id": "4",
@@ -34,7 +34,7 @@
       "email": "lili@gmail.com",
       "password": "lili",
       "role": "client",
-      "description": "client"
+      "description": ""
     },
     {
       "id": "5",
@@ -152,9 +152,9 @@
       "id": "1",
       "clientId": 2,
       "salleId": 1,
-      "dateDebut": "2026-06-01",
-      "dateFin": "2026-07-01",
-      "days": "20",
+      "dateDebut": "2026-6-1",
+      "dateFin": "2026-7-1",
+      "days": "15",
       "montant": 10000,
       "statut": "actif",
       "adresse": "diamalaye",
@@ -164,8 +164,8 @@
       "id": "2",
       "clientId": 4,
       "salleId": 1,
-      "dateDebut": "2026-06-15",
-      "dateFin": "2026-07-01",
+      "dateDebut": "2026-6-15",
+      "dateFin": "2026-7-1",
       "days": "15",
       "montant": 10000,
       "statut": "actif",
@@ -176,8 +176,8 @@
       "id": "3",
       "clientId": 3,
       "salleId": 1,
-      "dateDebut": "2026-06-20",
-      "dateFin": "2026-07-01",
+      "dateDebut": "2026-6-20",
+      "dateFin": "2026-7-1",
       "days": "10",
       "montant": 10000,
       "statut": "actif",
@@ -188,8 +188,8 @@
       "id": "4",
       "clientId": 3,
       "salleId": 2,
-      "dateDebut": "2026-06-01",
-      "dateFin": "2026-07-01",
+      "dateDebut": "2026-6-1",
+      "dateFin": "2026-7-1",
       "days": "30",
       "montant": 10000,
       "statut": "actif",
