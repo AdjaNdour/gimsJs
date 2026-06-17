@@ -41,7 +41,7 @@ const AddSalle = () => `
 
                 </div>
 
-                <textarea id="description" placeholder="Description"></textarea>
+                <textarea class="add-textarea" id="description" placeholder="Description"></textarea>
                 <input class="add-input" id="equipements" placeholder="Equipements">
                 <input class="add-input" id="qrWave" placeholder="QR Wave">
                 <input class="add-input" id="qrOrange" placeholder="QR Orange">

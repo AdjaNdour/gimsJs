@@ -44,7 +44,7 @@ const EmploieDuTemps = async () => {
     const dayCard = (label, sessions) => `
         <div class="monabo-day">
             
-            <button class="monabo-day-header" data-jour="${label}">
+            <button class="monabo-day-header" data-jour="${label.toLowerCase()}">
                 <h4>+${label}</h4>
             </button>
 
@@ -100,28 +100,64 @@ const EmploieDuTemps = async () => {
 
 
 EmploieDuTemps.afterRender = () => {
-    let boutons = document.querySelectorAll('.monabo-day-header');
+
+    const boutons = document.querySelectorAll(".monabo-day-header");
 
     boutons.forEach(btn => {
+
         btn.addEventListener("click", async () => {
 
             const user = AuthService.getUserConnect();
-            const abonnements = await Service.getAll("abonnements");
-            const monAbonnement = abonnements.find(a => String(a.clientId) === String(user.id) && a.statut === "actif");
 
-            const jour = btn.dataset.jour;
+            const abonnements = await Service.getAll("abonnements");
+
+            const monAbonnement = abonnements.find(
+                a =>
+                    String(a.clientId) === String(user.id) &&
+                    a.statut === "actif"
+            );
+
+            if (!monAbonnement) return;
+
+            const jour = btn.dataset.jour.toLowerCase();
+
+            const emplois = await Service.getAll("emploisDuTemps");
+
+            let edt = emplois.find(
+                e =>
+                    String(e.abonnementId) ===
+                    String(monAbonnement.id)
+            );
+
+            // Création si inexistant
+            if (!edt) {
+
+                edt = {
+                    abonnementId: monAbonnement.id,
+                    jour: [],
+                    activite: "Non définie"
+                };
+
+                edt = await Service.add("emploisDuTemps", edt);
+            }
+
+            // Ajout du jour
+            if (!edt.jour.includes(jour)) {
+
+                edt.jour.push(jour);
+
+                await Service.update(
+                    "emploisDuTemps",
+                    edt.id,
+                    edt
+                );
+            }
+
             console.log("Jour ajouté :", jour);
-            const edt = await Service.getById("emploisDuTemps", monAbonnement.id);
-            if (!edt.jour) {
-                edt.jour = [];
-            }
-            if (!edt.jour.includes(jour.toLowerCase())) {
-                edt.jour.push(jour.toLowerCase());
-            }
-            await Service.update("emploisDuTemps", edt.id, edt);
-            btn.c
         });
+
     });
+
 };
 
 
