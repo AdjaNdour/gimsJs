@@ -6,8 +6,8 @@
       "nom": "kiki",
       "email": "kiki@gmail.com",
       "password": "kiki",
-      "role": "coach",
-      "description": "coach en fitness depuis 3 ans "
+      "role": "admin",
+      "description": "admin de l'applis"
     },
     {
       "id": "2",
@@ -52,6 +52,14 @@
       "password": "mimi",
       "role": "client",
       "id": "xbOZNPrj4_M"
+    },
+    {
+      "nom": "loli",
+      "photo": "https://i.pinimg.com/1200x/8d/9f/42/8d9f4279d57c64c720036efb10bf32df.jpg",
+      "email": "loli@gmail.com",
+      "password": "loli",
+      "role": "coach",
+      "id": "a4Py18y7xWI"
     }
   ],
   "salles": [
@@ -145,6 +153,28 @@
         "https://i.pinimg.com/736x/48/96/c2/4896c29a479322f05bf34cb69393ba4a.jpg"
       ],
       "createdAt": "2026/01/03"
+    },
+    {
+      "nom": "babacarFit ",
+      "types": [
+        "yoga"
+      ],
+      "adresse": "dfghj",
+      "prix": 12000,
+      "description": "khdkvbljfs shfkfjs sjbboufs bonjour coucou je magfvjhw xdn,vk :hsdmfbvkyhws\n                ",
+      "equipements": [
+        "equipe"
+      ],
+      "qrWave": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Wave-[object HTMLInputElement]",
+      "qrOrange": "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=OrangeMoney-[object HTMLInputElement]",
+      "images": [
+        "https://i.pinimg.com/1200x/8d/9f/42/8d9f4279d57c64c720036efb10bf32df.jpg",
+        "https://i.pinimg.com/1200x/8d/9f/42/8d9f4279d57c64c720036efb10bf32df.jpg",
+        "https://i.pinimg.com/1200x/8d/9f/42/8d9f4279d57c64c720036efb10bf32df.jpg"
+      ],
+      "coachId": "a4Py18y7xWI",
+      "createdAt": "2026-06-17T13:59:34.797Z",
+      "id": "FLnPg-q4E74"
     }
   ],
   "abonnements": [
@@ -195,6 +225,17 @@
       "statut": "actif",
       "adresse": "diamalaye",
       "objectif": "hbdjkbclkj fkbcihbf sjhfrjn fjhojnsfoj jfkjb "
+    },
+    {
+      "clientId": "xbOZNPrj4_M",
+      "salleId": "FLnPg-q4E74",
+      "dateDebut": "2026-6-17",
+      "dateFin": "2026-7-17",
+      "days": 30,
+      "statut": "actif",
+      "adresse": "bourguiba",
+      "objectif": "dama beug moll",
+      "id": "O-IrdSNXAXU"
     }
   ],
   "emploisDuTemps": [

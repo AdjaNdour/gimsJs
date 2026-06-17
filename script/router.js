@@ -10,7 +10,8 @@ const routes = {
     "/emploieDuTemps": "emploieDuTemps",
     "/detailsSalle": "detailsSalle",
     "/subscription": "subscription",
-    "/maPage": "maPage"
+    "/maPage": "maPage",
+    "/addSalle": "addSalle"
 };
 
 const handleHashChange = async () => {
