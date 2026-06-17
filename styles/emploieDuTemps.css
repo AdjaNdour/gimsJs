@@ -21,16 +21,16 @@
 
 .monabo-calendar{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
+    grid-template-columns:repeat(7,1fr);
     gap:15px;
 }
 
-.monabo-day h4{
+/* .monabo-day h4{
     text-align:center;
     color:#ff6200;
     margin-bottom:15px;
     font-weight:700;
-}
+} */
 
 .monabo-session{
     background:white;
@@ -145,4 +145,28 @@
     font-size: 15px ;
     margin-top: 10px;
     color: #888;
+}
+.monabo-day-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.monabo-day button{
+    width:80px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;    
+    background:#fc5d02;
+    display: inline;
+    text-align: center;
+    color: #ffffff;
+    padding: 5px;
+}
+
+button:hover{
+    transform:scale(1.1);
 }

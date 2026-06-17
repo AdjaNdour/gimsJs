@@ -33,21 +33,29 @@ const EmploieDuTemps = async () => {
     };
 
     monPlanning.forEach(p => {
-        const j = p.jour.toLowerCase();
-        if (jours[j]) jours[j].push(p);
+        p.jour.forEach(jour => {
+            const j = jour.toLowerCase();
+            if (jours[j]) {
+                jours[j].push(p);
+            }
+        });
     });
 
     const dayCard = (label, sessions) => `
         <div class="monabo-day">
-            <h4>${label}</h4>
+            
+            <button class="monabo-day-header" data-jour="${label}">
+                <h4>+ ${label}</h4>
+            </button>
 
             ${sessions.length > 0 ? sessions.map(s => `
                 <div class="monabo-session">
-                    <span>${s.heure}</span>
+                    <span> rv </span>
                     <h3>${s.activite}</h3>
                     <small>Coach</small>
                 </div>
             `).join("") : ""}
+            
         </div>
     `;
 
@@ -60,6 +68,7 @@ const EmploieDuTemps = async () => {
                     <h2>Cette Semaine</h2>
                     <p>vous avez ${monPlanning.length} séances</p>
                 </div>
+    
 
                 <div class="monabo-calendar">
                     ${dayCard("MON", jours.lundi)}
@@ -87,4 +96,13 @@ const EmploieDuTemps = async () => {
     `;
 };
 
+EmploieDuTemps.afterRender = () => {
+let boutons = document.querySelectorAll('.monabo-day-header');
+    boutons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const jour = btn.dataset.jour;
+            console.log("Jour cliqué :", jour);
+        });
+    });
+}
 export default EmploieDuTemps;

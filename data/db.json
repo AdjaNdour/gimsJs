@@ -201,15 +201,13 @@
     {
       "id": "1",
       "abonnementId": "1",
-      "jour": "Lundi",
-      "heure": "18:00",
+      "jour": ["lundi","mardi"],
       "activite": "Cardio"
     },
     {
       "id": "2",
-      "abonnementId": "1",
-      "jour": "Mercredi",
-      "heure": "19:00",
+      "abonnementId": "2",
+      "jour": ["mardi","mercredi"],
       "activite": "Yoga"
     }
   ],
