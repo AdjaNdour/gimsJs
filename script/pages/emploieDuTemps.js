@@ -45,7 +45,7 @@ const EmploieDuTemps = async () => {
         <div class="monabo-day">
             
             <button class="monabo-day-header" data-jour="${label}">
-                <h4>+ ${label}</h4>
+                <h4>+${label}</h4>
             </button>
 
             ${sessions.length > 0 ? sessions.map(s => `
@@ -68,18 +68,20 @@ const EmploieDuTemps = async () => {
                     <h2>Cette Semaine</h2>
                     <p>vous avez ${monPlanning.length} séances</p>
                 </div>
-    
 
                 <div class="monabo-calendar">
-                    ${dayCard("MON", jours.lundi)}
-                    ${dayCard("TUE", jours.mardi)}
-                    ${dayCard("WED", jours.mercredi)}
-                    ${dayCard("THU", jours.jeudi)}
-                    ${dayCard("FRI", jours.vendredi)}
-                    ${dayCard("SAT", jours.samedi)}
-                    ${dayCard("SUN", jours.dimanche)}
+                    ${dayCard("Lundi", jours.lundi)}
+                    ${dayCard("Mardi", jours.mardi)}
+                    ${dayCard("Mercredi", jours.mercredi)}
+                    ${dayCard("Jeudi", jours.jeudi)}
+                    ${dayCard("vendredi", jours.vendredi)}
+                    ${dayCard("Samedi", jours.samedi)}
+                    <div class="monabo-day">          
+                        <button >
+                            <h4>Dimanche</h4>
+                        </button>        
+                    </div>
                 </div>
-
             </div>
 
             <div class="detail-t1">
@@ -96,13 +98,31 @@ const EmploieDuTemps = async () => {
     `;
 };
 
+
 EmploieDuTemps.afterRender = () => {
-let boutons = document.querySelectorAll('.monabo-day-header');
+    let boutons = document.querySelectorAll('.monabo-day-header');
+
     boutons.forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", async () => {
+
+            const user = AuthService.getUserConnect();
+            const abonnements = await Service.getAll("abonnements");
+            const monAbonnement = abonnements.find(a => String(a.clientId) === String(user.id) && a.statut === "actif");
+
             const jour = btn.dataset.jour;
-            console.log("Jour cliqué :", jour);
+            console.log("Jour ajouté :", jour);
+            const edt = await Service.getById("emploisDuTemps", monAbonnement.id);
+            if (!edt.jour) {
+                edt.jour = [];
+            }
+            if (!edt.jour.includes(jour.toLowerCase())) {
+                edt.jour.push(jour.toLowerCase());
+            }
+            await Service.update("emploisDuTemps", edt.id, edt);
+            btn.c
         });
     });
-}
+};
+
+
 export default EmploieDuTemps;

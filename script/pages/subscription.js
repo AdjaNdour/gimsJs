@@ -99,21 +99,30 @@ Subscription.afterRender = () => {
         const dateDebut = new Date();
 
         const jour = dateDebut.getDate();
-        const mois = dateDebut.getMonth()+ 1;
+        const mois = dateDebut.getMonth() + 1;
         const annee = dateDebut.getFullYear();
 
         const abo = {
             clientId: userConnect.id,
             salleId: salleId,
             dateDebut: `${annee}-${mois}-${jour}`,
-            dateFin: `${annee}-${mois+1}-${jour}`,
+            dateFin: `${annee}-${mois + 1}-${jour}`,
             days: 30,
             montant: salle.prix,
             statut: "actif",
             adresse: add,
             objectif: obj
         };
+
         await Service.add("abonnements", abo);
+
+        const emploie = {
+            id: abo.id,
+            abonnementId: abo.id,
+            jour: [],
+            activite: Yoga
+        };
+        Service.add("emploisDuTemps", emploie)
     }
 
     form.addEventListener("submit", async (e) => {
